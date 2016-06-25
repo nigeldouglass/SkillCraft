@@ -1,0 +1,14 @@
+/*
+!/.gitignore
+!/.gitmodules
+!/src
+!/gradle
+!/gradlew
+!/gradlew.bat
+!/build.gradle
+!/build.properties
+!/build.bat
+!/build.sh
+!/gradle.properties
+!/webresources
+*.md
