@@ -22,8 +22,10 @@ package com.fatality.skillcraft.client.gui.books;
 
 import com.fatality.skillcraft.api.utils.EnumSkills;
 import com.fatality.skillcraft.utils.GuiHelper;
+import com.fatality.skillcraft.utils.INode;
 import com.fatality.skillcraft.utils.ModInfo;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
@@ -31,15 +33,17 @@ import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class GuiSkillBook extends GuiContainer {
 	
 	public final ResourceLocation background = new ResourceLocation(ModInfo.MOD_ID + ":textures/gui/skillbook.png");
-	
 	private EntityPlayer player;
+	private boolean showLevel = false;
 	
-	private	boolean showLevel = false;
+	private List<INode> skillNodes = new ArrayList<INode>();
 	
 	public GuiSkillBook(Container inventorySlotsIn, EntityPlayer player) {
 		super(inventorySlotsIn);
@@ -48,6 +52,20 @@ public class GuiSkillBook extends GuiContainer {
 	
 	public void initGui() {
 		super.initGui();
+		
+		skillNodes.clear();
+		
+		int x = guiLeft - 40;
+		int col = 0;
+		int row = 0;
+		for (EnumSkills skill : EnumSkills.values()) {
+			if (row == 3) {
+				row = 0;
+				col += 1;
+			}
+			skillNodes.add(new INode(x + (col * 70), 20 + (row * 70), "apple", 1.15F, 4, 4, skill.getNameUpper(), skill.getColour()));
+			row += 1;
+		}
 	}
 	
 	@Override
@@ -72,40 +90,27 @@ public class GuiSkillBook extends GuiContainer {
 		x += 10;
 		int y = 20;
 		int select = 0;
+		for (int i = 0; i < skillNodes.size(); i++) {
+			skillNodes.get(i).render(this, mouseX, mouseY);
+		}
 		for (int j = 0; j < 2; j++) {
 			for (int i = 1; i <= 3; i++) {
 				if (select > EnumSkills.values().length - 1)
 					break;
 				
-				GlStateManager.pushMatrix();
-				int c = EnumSkills.byMeta(select).getColour();
 				
-				if ((c & -67108864) == 0) {
-					c |= -16777216;
-				}
-				
-				float red = (float) (c >> 16 & 255) / 255.0F;
-				float green = (float) (c >> 8 & 255) / 255.0F;
-				float blue = (float) (c & 255) / 255.0F;
-				float alpha = (float) (c >> 24 & 255) / 255.0F;
-				
-				GlStateManager.color(red, green, blue, alpha);
-				this.drawTexturedModalRect(x, y + 2, 206, 50, 50, 50);
-				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-				this.drawTexturedModalRect(x, y, 206, 0, 50, 50);
-				
-				this.fontRendererObj.drawString(EnumSkills.byMeta(select).getNameUpper(), x, y + 55, EnumSkills.byMeta(select).getColour(), false);
-				if(showLevel) {
+				if (showLevel) {
+					GlStateManager.pushMatrix();
 					Minecraft.getMinecraft().getTextureManager().bindTexture(background);
 					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-					this.drawTexturedModalRect(x+14, y+2, 184, 0, 22, 14);
+					this.drawTexturedModalRect(x + 14, y + 2, 184, 0, 22, 14);
 					
 					Random r = new Random();
 					this.fontRendererObj.drawString(r.nextInt(80) + 10 + "", x + 19, y + 3, new Color(255, 63, 5).hashCode(), true);
+					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+					Minecraft.getMinecraft().getTextureManager().bindTexture(background);
+					GlStateManager.popMatrix();
 				}
-				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-				Minecraft.getMinecraft().getTextureManager().bindTexture(background);
-				GlStateManager.popMatrix();
 				
 				
 				y += 70;
@@ -119,7 +124,16 @@ public class GuiSkillBook extends GuiContainer {
 	
 	@Override
 	protected void keyTyped(char typedChar, int keyCode) {
-		if(typedChar=='l')
+		System.out.println(keyCode);
+		if (typedChar == 'l')
 			this.showLevel = !showLevel;
+		
+		if (keyCode == 1) {
+			this.mc.displayGuiScreen((GuiScreen) null);
+			
+			if (this.mc.currentScreen == null) {
+				this.mc.setIngameFocus();
+			}
+		}
 	}
 }

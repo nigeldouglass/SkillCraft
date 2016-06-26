@@ -21,11 +21,14 @@
 package com.fatality.skillcraft.utils;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -57,6 +60,54 @@ public class GuiHelper {
 				.endVertex();
 		tessellator.draw();
 		
+		GlStateManager.popMatrix();
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+	}
+	
+	public static void addElement(int xPosition, int yPosition, int xTexturePosition, int yTexturePosition, int xSize,
+	                              int ySize, String text, float scale, ResourceLocation texture, GuiContainer gui) {
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+		renderElement(xPosition, yPosition, xTexturePosition, yTexturePosition, xSize, ySize, text, scale, texture,
+				gui);
+	}
+	
+	private static void renderElement(int xPosition, int yPosition, int xTexturePosition, int yTexturePosition,
+	                                  int xSize, int ySize, String text, float scale, ResourceLocation texture, GuiContainer gui) {
+		GlStateManager.pushMatrix();
+		Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
+		GlStateManager.enableBlend();
+		OpenGlHelper.glBlendFunc(770, 771, 1, 0);
+		GlStateManager.blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		gui.drawTexturedModalRect(xPosition, yPosition, xTexturePosition, yTexturePosition, xSize, ySize);
+		if (!text.equals("")) {
+			glScalef(scale, scale, scale);
+			int l = 14737632;
+			float amend = (1 / scale);
+			FontRenderer fontrenderer = Minecraft.getMinecraft().fontRendererObj;
+			gui.drawCenteredString(fontrenderer, text, (int) ((xPosition + xSize / 2) * amend) + 1,
+					(int) ((yPosition + (ySize - (9 / amend)) / 2) * amend) + 1, l);
+		}
+		GlStateManager.popMatrix();
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+	}
+	
+	public static float getCenter(String string, int xPos, int width, float scale) {
+		return ((xPos + width / 2)
+				- Minecraft.getMinecraft().fontRendererObj.getStringWidth(string) / (2 / scale));
+	}
+	
+	public static void addText(float xPosition, float yPosition, String text, float scale, int colour, boolean shadow) {
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+		GlStateManager.pushMatrix();
+		GlStateManager.translate(0, 0, 5);
+		GlStateManager.scale(scale, scale, 0F);
+		GlStateManager.translate(xPosition / scale, yPosition / scale, 5);
+		FontRenderer fontrenderer = Minecraft.getMinecraft().fontRendererObj;
+		if (shadow) {
+			fontrenderer.drawStringWithShadow(text, 0, 0, colour);
+		} else {
+			fontrenderer.drawString(text, 0, 0, colour);
+		}
 		GlStateManager.popMatrix();
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 	}
