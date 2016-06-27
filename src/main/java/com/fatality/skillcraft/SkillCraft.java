@@ -20,14 +20,18 @@
 
 package com.fatality.skillcraft;
 
+import com.fatality.skillcraft.api.skills.SkillRegistry;
 import com.fatality.skillcraft.proxy.IProxy;
 import com.fatality.skillcraft.utils.ModInfo;
+import net.minecraft.init.Items;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+
+import java.util.List;
 
 @Mod(modid = ModInfo.MOD_ID, name = ModInfo.MOD_NAME, version = ModInfo.VERSION)
 public class SkillCraft {
@@ -42,6 +46,10 @@ public class SkillCraft {
 	
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		proxy.initialiseAPI();
+		
+		proxy.registerSkills();
+		
 		proxy.registerBlocks();
 		proxy.registerItems();
 		proxy.registerRecipes();

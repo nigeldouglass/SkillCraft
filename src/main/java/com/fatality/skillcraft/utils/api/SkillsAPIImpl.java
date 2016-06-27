@@ -3,7 +3,7 @@
  */
 
 /* You are free to:
- *
+ * 
  * Share — copy and redistribute the material in any medium or format
  * Adapt — remix, transform, and build upon the material
  * for any purpose, even commercially.
@@ -13,35 +13,21 @@
  * ShareAlike — If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original.
  * No additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
  * Notices:
- *
+ * 
  * You do not have to comply with the license for elements of the material in the public domain or where your use is permitted by an applicable exception or limitation.
  * No warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
  */
 
-package com.fatality.skillcraft.proxy;
+package com.fatality.skillcraft.utils.api;
 
-import java.lang.reflect.InvocationTargetException;
+import com.fatality.skillcraft.api.skills.SkillRegistry;
+import com.fatality.skillcraft.api.skills.api.ISkill;
+import com.fatality.skillcraft.api.skills.api.ISkillAPI;
+import com.fatality.skillcraft.api.skills.api.ISkillRegistry;
 
-public interface IProxy {
-	
-	void initialiseAPI();
-	
-	void registerSkills();
-	
-	void registerBlocks();
-	
-	void registerItems();
-	
-	void registerRecipes();
-	
-	void registerOreDict();
-	
-	void registerWorldGen();
-	
-	void registerGUIs();
-	
-	void registerRenderers();
-	
-	void registerEvents();
-	
+public class SkillsAPIImpl implements ISkillAPI {
+	@Override
+	public ISkillRegistry<ISkill> skillRegistry() {
+		return SkillRegistry.instance();
+	}
 }
