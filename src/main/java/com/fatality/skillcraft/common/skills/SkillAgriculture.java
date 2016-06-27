@@ -3,7 +3,7 @@
  */
 
 /* You are free to:
- *
+ * 
  * Share — copy and redistribute the material in any medium or format
  * Adapt — remix, transform, and build upon the material
  * for any purpose, even commercially.
@@ -13,35 +13,53 @@
  * ShareAlike — If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original.
  * No additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
  * Notices:
- *
+ * 
  * You do not have to comply with the license for elements of the material in the public domain or where your use is permitted by an applicable exception or limitation.
  * No warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
  */
 
-package com.fatality.skillcraft.proxy;
+package com.fatality.skillcraft.common.skills;
 
-import java.lang.reflect.InvocationTargetException;
+import com.fatality.skillcraft.api.skills.api.ISkill;
+import com.fatality.skillcraft.common.skills.events.EventAgriculture;
+import net.minecraft.util.ResourceLocation;
 
-public interface IProxy {
+import java.awt.*;
+
+public class SkillAgriculture implements ISkill {
+	@Override
+	public Object getEventClass() {
+		return new EventAgriculture();
+	}
 	
-	void initialiseAPI();
+	@Override
+	public String getSkillName() {
+		return "Agriculture";
+	}
 	
-	void registerSkills();
+	@Override
+	public int getBadgeColour() {
+		return new Color(16, 63, 12).hashCode();
+		/*
+		MINING("Mining", 1, new Color(130, 130, 130).hashCode()),
+		FISHING("Fishing", 2, new Color(92, 183, 255).hashCode()),
+		FORESTRY("Forestry", 3, new Color(60, 125, 5).hashCode()),
+		COOKING("Cooking", 4, new Color(160, 100, 40).hashCode()),
+		 */
+	}
 	
-	void registerBlocks();
+	@Override
+	public ResourceLocation getResourceLocation() {
+		return null;
+	}
 	
-	void registerItems();
+	@Override
+	public int getIconX() {
+		return 0;
+	}
 	
-	void registerRecipes();
-	
-	void registerOreDict();
-	
-	void registerWorldGen();
-	
-	void registerGUIs();
-	
-	void registerRenderers();
-	
-	void registerEvents();
-	
+	@Override
+	public int getIconY() {
+		return 0;
+	}
 }

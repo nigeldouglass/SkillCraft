@@ -20,7 +20,8 @@
 
 package com.fatality.skillcraft.client.gui.books;
 
-import com.fatality.skillcraft.api.utils.EnumSkills;
+import com.fatality.skillcraft.api.skills.SkillRegistry;
+import com.fatality.skillcraft.api.skills.api.ISkill;
 import com.fatality.skillcraft.utils.GuiHelper;
 import com.fatality.skillcraft.utils.INode;
 import com.fatality.skillcraft.utils.ModInfo;
@@ -58,12 +59,12 @@ public class GuiSkillBook extends GuiContainer {
 		int x = guiLeft - 40;
 		int col = 0;
 		int row = 0;
-		for (EnumSkills skill : EnumSkills.values()) {
+		for (ISkill skill : SkillRegistry.instance().getRegisteredSkills()) {
 			if (row == 3) {
 				row = 0;
 				col += 1;
 			}
-			skillNodes.add(new INode(x + (col * 70), 20 + (row * 70), "apple", 1.15F, 4, 4, skill.getNameUpper(), skill.getColour()));
+			skillNodes.add(new INode(x + (col * 70), 20 + (row * 70), "apple", 1.15F, 4, 4, skill.getSkillName(), skill.getBadgeColour()));
 			row += 1;
 		}
 	}
@@ -95,8 +96,8 @@ public class GuiSkillBook extends GuiContainer {
 		}
 		for (int j = 0; j < 2; j++) {
 			for (int i = 1; i <= 3; i++) {
-				if (select > EnumSkills.values().length - 1)
-					break;
+//				if (select > EnumSkills.values().length - 1)
+//					break;
 				
 				
 				if (showLevel) {

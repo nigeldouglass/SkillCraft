@@ -20,6 +20,7 @@
 
 package com.fatality.skillcraft;
 
+import com.fatality.skillcraft.api.skills.SkillRegistry;
 import com.fatality.skillcraft.proxy.IProxy;
 import com.fatality.skillcraft.utils.ModInfo;
 import net.minecraft.init.Items;
@@ -45,6 +46,10 @@ public class SkillCraft {
 	
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		proxy.initialiseAPI();
+		
+		proxy.registerSkills();
+		
 		proxy.registerBlocks();
 		proxy.registerItems();
 		proxy.registerRecipes();

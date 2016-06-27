@@ -22,14 +22,31 @@ package com.fatality.skillcraft.proxy;
 
 import com.fatality.skillcraft.SkillCraft;
 import com.fatality.skillcraft.api.recipes.IRecipes;
+import com.fatality.skillcraft.api.skills.SkillRegistry;
+import com.fatality.skillcraft.api.skills.SkillsAPI;
+import com.fatality.skillcraft.api.skills.api.ISkill;
+import com.fatality.skillcraft.common.skills.Skills;
 import com.fatality.skillcraft.utils.GuiHandler;
 import com.fatality.skillcraft.common.blocks.Blocks;
 import com.fatality.skillcraft.common.events.EventPlayer;
 import com.fatality.skillcraft.common.items.Items;
+import com.fatality.skillcraft.utils.api.SkillsAPIImpl;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
+import java.lang.reflect.InvocationTargetException;
+
 public class CommonProxy implements IProxy {
+	@Override
+	public void initialiseAPI() {
+		SkillsAPI.setup(new SkillsAPIImpl());
+	}
+	
+	@Override
+	public void registerSkills() {
+		Skills.registerSkills();
+	}
+	
 	@Override
 	public void registerBlocks() {
 		Blocks.registerBlocks();
@@ -77,5 +94,10 @@ public class CommonProxy implements IProxy {
 	@Override
 	public void registerEvents() {
 		MinecraftForge.EVENT_BUS.register(new EventPlayer());
+		for (ISkill skill : SkillRegistry.instance().getRegisteredSkills()) {
+			if (skill.getEventClass() != null) {
+				MinecraftForge.EVENT_BUS.register(skill.getEventClass());
+			}
+		}
 	}
 }

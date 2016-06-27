@@ -18,30 +18,38 @@
  * No warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
  */
 
-package com.fatality.skillcraft.proxy;
+package com.fatality.skillcraft.common.skills;
 
-import java.lang.reflect.InvocationTargetException;
+import com.fatality.skillcraft.api.blocks.BlockBase;
+import com.fatality.skillcraft.api.skills.SkillRegistry;
+import com.fatality.skillcraft.api.skills.api.ISkill;
+import com.fatality.skillcraft.utils.Register;
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 
-public interface IProxy {
+public enum Skills {
+	SKILL_AGRICULTURE(SkillAgriculture.class),
+	;
 	
-	void initialiseAPI();
+	private final Class<? extends ISkill> skillClass;
+	private ISkill skill;
 	
-	void registerSkills();
+	Skills(Class<? extends ISkill> skillClass) {
+		this.skillClass = skillClass;
+	}
 	
-	void registerBlocks();
+	public static void registerSkills() {
+		for (Skills skill : Skills.values()) {
+			skill.register();
+		}
+	}
 	
-	void registerItems();
+	public ISkill getSkill() {
+		return this.skill;
+	}
 	
-	void registerRecipes();
-	
-	void registerOreDict();
-	
-	void registerWorldGen();
-	
-	void registerGUIs();
-	
-	void registerRenderers();
-	
-	void registerEvents();
-	
+	private void register() {
+		skill = SkillRegistry.instance().registerSkill(skillClass);
+	}
 }
