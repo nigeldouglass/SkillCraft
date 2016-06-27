@@ -24,7 +24,11 @@ import com.fatality.skillcraft.api.skills.SkillRegistry;
 import com.fatality.skillcraft.api.skills.api.ISkill;
 
 public enum Skills {
-	SKILL_AGRICULTURE(SkillAgriculture.class),;
+	SKILL_AGRICULTURE(SkillAgriculture.class),
+	SKILL_COOKING(SkillCooking.class),
+	SKILL_FISHING(SkillFishing.class),
+	SKILL_FORESTRY(SkillForestry.class),
+	;
 	
 	private final Class<? extends ISkill> skillClass;
 	private ISkill skill;

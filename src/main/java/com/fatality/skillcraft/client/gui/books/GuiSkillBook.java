@@ -125,7 +125,6 @@ public class GuiSkillBook extends GuiContainer {
 	
 	@Override
 	protected void keyTyped(char typedChar, int keyCode) {
-		System.out.println(keyCode);
 		if (typedChar == 'l')
 			this.showLevel = !showLevel;
 		

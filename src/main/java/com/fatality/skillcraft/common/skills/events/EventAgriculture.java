@@ -20,16 +20,33 @@
 
 package com.fatality.skillcraft.common.skills.events;
 
+import com.fatality.skillcraft.api.skills.api.Level;
+import com.fatality.skillcraft.api.skills.api.events.IHandleEvents;
+import com.fatality.skillcraft.api.skills.api.ISkill;
+import com.fatality.skillcraft.common.skills.SkillAgriculture;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
-public class EventAgriculture {
+import java.util.Map;
+
+public class EventAgriculture extends IHandleEvents {
+	
+	public EventAgriculture(ISkill instance) {
+		super(instance);
+	}
 	
 	@SubscribeEvent
 	public void firstJoin(PlayerEvent.PlayerLoggedInEvent event) {
 		EntityPlayer player = event.player;
-		System.out.println(player.getName() + " has entered the game");
+		for(Map.Entry<Block,Integer> b: ((SkillAgriculture)instance).getBlocksPlaced().entrySet()) {
+			System.out.println(String.format("%s when placed gives you %s exp", b.getKey(), b.getValue()));
+		}
+		
+		for(Level level : instance.getSkillLevels()){
+			System.out.println(String.format("[%s] %s - %s", level.getLevel(), level.getTitle(), level.getDescription()));
+		}
 	}
 	
 }

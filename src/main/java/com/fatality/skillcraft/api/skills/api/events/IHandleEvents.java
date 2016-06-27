@@ -18,10 +18,20 @@
  * No warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
  */
 
-package com.fatality.skillcraft.api.skills.api;
+package com.fatality.skillcraft.api.skills.api.events;
 
-public interface ISkillAPI {
+import com.fatality.skillcraft.api.skills.api.ISkill;
+
+public class IHandleEvents {
 	
-	ISkillRegistry<ISkill> skillRegistry();
+	public ISkill instance;
+	
+	/**
+	 *
+	 * @param instance passthrow the ISkill to be able to access in the event manager
+	 */
+	public IHandleEvents(ISkill instance){
+		this.instance = instance;
+	}
 	
 }

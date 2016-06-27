@@ -22,18 +22,22 @@ package com.fatality.skillcraft.api.skills.api;
 
 import net.minecraft.util.ResourceLocation;
 
-public interface ISkill extends IHandleEvents {
+public interface ISkill extends IHandleLevels {
 	
-	public String getSkillName();
+	Object getEventClass();
 	
-	public int defaultLevel();
+	String getSkillName();
 	
-	public int getBadgeColour();
+	int defaultLevel();
 	
-	public ResourceLocation getResourceLocation();
+	int getBadgeColour();
 	
-	public int getIconX();
+	ResourceLocation getResourceLocation();
 	
-	public int getIconY();
+	int getIconX();
+	
+	int getIconY();
+	
+	
 	
 }

@@ -20,8 +20,10 @@
 
 package com.fatality.skillcraft.api.skills.api;
 
-public interface ISkillAPI {
+import java.util.List;
+
+public interface IHandleLevels {
 	
-	ISkillRegistry<ISkill> skillRegistry();
+	List<Level> getSkillLevels();
 	
 }

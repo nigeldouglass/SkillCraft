@@ -18,10 +18,55 @@
  * No warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
  */
 
-package com.fatality.skillcraft.api.skills.api;
+package com.fatality.skillcraft.common.skills;
 
-public interface ISkillAPI {
+import com.fatality.skillcraft.api.skills.api.ISkill;
+import com.fatality.skillcraft.api.skills.api.Level;
+import com.fatality.skillcraft.common.skills.events.EventCooking;
+import net.minecraft.util.ResourceLocation;
+
+import java.awt.*;
+import java.util.*;
+import java.util.List;
+
+public class SkillCooking implements ISkill {
+	@Override
+	public Object getEventClass() {
+		return new EventCooking();
+	}
 	
-	ISkillRegistry<ISkill> skillRegistry();
+	@Override
+	public String getSkillName() {
+		return "Cooking";
+	}
 	
+	@Override
+	public int defaultLevel() {
+		return 1;
+	}
+	
+	@Override
+	public int getBadgeColour() {
+		return new Color(160, 100, 40).hashCode();
+	}
+	
+	@Override
+	public ResourceLocation getResourceLocation() {
+		return null;
+	}
+	
+	@Override
+	public int getIconX() {
+		return 0;
+	}
+	
+	@Override
+	public int getIconY() {
+		return 0;
+	}
+	
+	@Override
+	public List<Level> getSkillLevels() {
+		return null;
+	}
 }

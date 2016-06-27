@@ -18,10 +18,7 @@
  * No warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
  */
 
-package com.fatality.skillcraft.api.skills.api;
+package com.fatality.skillcraft.common.skills.events;
 
-public interface IHandleEvents {
-	
-	public Object getEventClass();
-	
+public class EventFishing {
 }

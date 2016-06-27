@@ -20,16 +20,32 @@
 
 package com.fatality.skillcraft.common.skills;
 
+import com.fatality.skillcraft.api.skills.api.Level;
+import com.fatality.skillcraft.api.skills.api.events.IHandlePlace;
 import com.fatality.skillcraft.api.skills.api.ISkill;
 import com.fatality.skillcraft.common.skills.events.EventAgriculture;
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
 
 import java.awt.*;
+import java.util.*;
+import java.util.List;
 
-public class SkillAgriculture implements ISkill {
+public class SkillAgriculture implements ISkill, IHandlePlace {
+	
+	List<Level> levels = new ArrayList<Level>();
+	
+	public SkillAgriculture(){
+		levels.add(new Level(1, "New World", "A whole new world."));
+		levels.add(new Level(3, "Every Grower Helps", "Growing the world."));
+		levels.add(new Level(7, "Plantation", "We are ready for harvest."));
+		levels.add(new Level(13, "Expansion", "Trials are coming."));
+	}
+	
 	@Override
 	public Object getEventClass() {
-		return new EventAgriculture();
+		return new EventAgriculture(this);
 	}
 	
 	@Override
@@ -45,12 +61,6 @@ public class SkillAgriculture implements ISkill {
 	@Override
 	public int getBadgeColour() {
 		return new Color(16, 63, 12).hashCode();
-		/*
-		MINING("Mining", 1, new Color(130, 130, 130).hashCode()),
-		FISHING("Fishing", 2, new Color(92, 183, 255).hashCode()),
-		FORESTRY("Forestry", 3, new Color(60, 125, 5).hashCode()),
-		COOKING("Cooking", 4, new Color(160, 100, 40).hashCode()),
-		 */
 	}
 	
 	@Override
@@ -66,5 +76,17 @@ public class SkillAgriculture implements ISkill {
 	@Override
 	public int getIconY() {
 		return 0;
+	}
+	
+	@Override
+	public Map<Block, Integer> getBlocksPlaced() {
+		Map<Block, Integer> blocks =  new HashMap<Block, Integer>();
+		blocks.put(Blocks.CACTUS, 5);
+		return blocks;
+	}
+	
+	@Override
+	public List<Level> getSkillLevels() {
+		return this.levels;
 	}
 }

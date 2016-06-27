@@ -24,7 +24,7 @@ import java.util.Collection;
 
 public interface ISkillRegistry<T> {
 	
-	public ISkill registerSkill(Class<? extends T> skill);
+	ISkill registerSkill(Class<? extends T> skill);
 	
-	public Collection<T> getRegisteredSkills();
+	Collection<T> getRegisteredSkills();
 }

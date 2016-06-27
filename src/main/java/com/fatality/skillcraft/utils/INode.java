@@ -146,7 +146,6 @@ public class INode {
 			GuiHelper.drawRectWithUV(mouseX + 8 + width, mouseY + 3, 186, 15, 1, height, 1, 1, background);
 			GuiHelper.drawRectWithUV(mouseX + 8 + width, mouseY + 3 + height, 186, 16, 1, 1, 1, 1, background);
 			
-			System.out.println(Minecraft.getMinecraft().fontRendererObj.getStringWidth(title) * 1.25F);
 			GuiHelper.addText(GuiHelper.getCenter(title, mouseX + 7, (int) Math.ceil(width), 0.85F), mouseY + 4, title, 0.85F, new Color(0, 0, 0).hashCode(),
 					false);
 			

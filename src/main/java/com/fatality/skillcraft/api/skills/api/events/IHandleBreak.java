@@ -18,10 +18,14 @@
  * No warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
  */
 
-package com.fatality.skillcraft.api.skills.api;
+package com.fatality.skillcraft.api.skills.api.events;
 
-public interface ISkillAPI {
+import net.minecraft.block.Block;
+
+import java.util.Map;
+
+public interface IHandleBreak {
 	
-	ISkillRegistry<ISkill> skillRegistry();
+	Map<Block, Integer> getBlocksMined();
 	
 }

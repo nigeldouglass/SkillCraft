@@ -18,10 +18,55 @@
  * No warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
  */
 
-package com.fatality.skillcraft.api.skills.api;
+package com.fatality.skillcraft.common.skills;
 
-public interface ISkillAPI {
+import com.fatality.skillcraft.api.skills.api.ISkill;
+import com.fatality.skillcraft.api.skills.api.Level;
+import com.fatality.skillcraft.common.skills.events.EventForestry;
+import net.minecraft.util.ResourceLocation;
+
+import java.awt.*;
+import java.util.*;
+import java.util.List;
+
+public class SkillForestry implements ISkill {
+	@Override
+	public Object getEventClass() {
+		return new EventForestry();
+	}
 	
-	ISkillRegistry<ISkill> skillRegistry();
+	@Override
+	public String getSkillName() {
+		return "Forestry";
+	}
 	
+	@Override
+	public int defaultLevel() {
+		return 1;
+	}
+	
+	@Override
+	public int getBadgeColour() {
+		return new Color(60, 125, 5).hashCode();
+	}
+	
+	@Override
+	public ResourceLocation getResourceLocation() {
+		return null;
+	}
+	
+	@Override
+	public int getIconX() {
+		return 0;
+	}
+	
+	@Override
+	public int getIconY() {
+		return 0;
+	}
+	
+	@Override
+	public List<Level> getSkillLevels() {
+		return null;
+	}
 }

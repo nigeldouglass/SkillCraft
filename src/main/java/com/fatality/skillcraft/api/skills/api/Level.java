@@ -20,8 +20,28 @@
 
 package com.fatality.skillcraft.api.skills.api;
 
-public interface ISkillAPI {
+public class Level {
 	
-	ISkillRegistry<ISkill> skillRegistry();
+	private int level;
+	private String title;
+	private String description;
+	
+	public Level(int level, String title, String description){
+		this.level = level;
+		this.title = title;
+		this.description = description;
+	}
+	
+	public int getLevel(){
+		return this.level;
+	}
+	
+	public String getTitle(){
+		return this.title;
+	}
+	
+	public String getDescription(){
+		return this.description;
+	}
 	
 }
