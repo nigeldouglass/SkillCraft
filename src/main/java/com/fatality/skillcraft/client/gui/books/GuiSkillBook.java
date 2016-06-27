@@ -21,14 +21,13 @@
 package com.fatality.skillcraft.client.gui.books;
 
 import com.fatality.skillcraft.api.skills.SkillRegistry;
-import com.fatality.skillcraft.api.skills.api.ISkill;
+import com.fatality.skillcraft.api.skills.api.SkillBase;
 import com.fatality.skillcraft.utils.GuiHelper;
 import com.fatality.skillcraft.utils.INode;
 import com.fatality.skillcraft.utils.ModInfo;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
@@ -36,13 +35,14 @@ import net.minecraft.util.ResourceLocation;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class GuiSkillBook extends GuiContainer {
 	
 	public final ResourceLocation background = new ResourceLocation(ModInfo.MOD_ID + ":textures/gui/skillbook.png");
 	private EntityPlayer player;
 	private boolean showLevel = false;
+	
+	private float test = 0.0f;
 	
 	private List<INode> skillNodes = new ArrayList<INode>();
 	
@@ -56,15 +56,15 @@ public class GuiSkillBook extends GuiContainer {
 		
 		skillNodes.clear();
 		
-		int x = guiLeft - 40;
 		int col = 0;
 		int row = 0;
-		for (ISkill skill : SkillRegistry.instance().getRegisteredSkills()) {
-			if (row == 3) {
+		for (int i = 0; i < SkillRegistry.instance().getRegisteredSkills().size(); i++) {
+			SkillBase skill = SkillRegistry.instance().getRegisteredSkills().get(i);
+			if (row == 2) {
 				row = 0;
 				col += 1;
 			}
-			skillNodes.add(new INode(x + (col * 70), 20 + (row * 70), "apple", 1.15F, 4, 4, skill.getSkillName(), skill.getBadgeColour()));
+			skillNodes.add(new INode(guiLeft + 17 + (col * 83), guiTop + (row * 70), "apple", 1.15F, 4, 4, skill.getSkillName(), skill.getBadgeColour()));
 			row += 1;
 		}
 	}
@@ -72,55 +72,20 @@ public class GuiSkillBook extends GuiContainer {
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
 		Minecraft.getMinecraft().getTextureManager().bindTexture(background);
-		int x = guiLeft - 60;
-		// Top
-		GuiHelper.drawRectWithUV(0 + x, 10, 0, 0, 12, 12, 12, 12, background);
-		GuiHelper.drawRectWithUV(12 + x, 10, 12, 0, 300, 12, 1, 12, background);
-		GuiHelper.drawRectWithUV(312 + x, 10, 14, 0, 12, 12, 12, 12, background);
 		
-		// Middle
-		GuiHelper.drawRectWithUV(0 + x, 22, 0, 12, 12, 200, 12, 1, background);
-		GuiHelper.drawRectWithUV(311 + x, 22, 13, 12, 12, 200, 12, 1, background);
-		GuiHelper.drawRectWithUV(12 + x, 22, 13, 13, 299, 200, 1, 1, background);
+		this.drawTexturedModalRect(guiLeft, guiTop - 30, 0, 0, 160, 203);
 		
-		// Bottom
-		GuiHelper.drawRectWithUV(0 + x, 222, 0, 13, 12, 12, 12, 12, background);
-		GuiHelper.drawRectWithUV(12 + x, 222, 12, 13, 300, 12, 1, 12, background);
-		GuiHelper.drawRectWithUV(312 + x, 222, 14, 13, 12, 12, 12, 12, background);
+		GuiHelper.addText(GuiHelper.getCenter("Skill Book", guiLeft, 160, 2F), guiTop - 20, "Skill Book", 2F, new Color(180, 170, 150).hashCode(),
+				false);
+		Minecraft.getMinecraft().getTextureManager().bindTexture(background);
 		
-		x += 10;
-		int y = 20;
-		int select = 0;
 		for (int i = 0; i < skillNodes.size(); i++) {
 			skillNodes.get(i).render(this, mouseX, mouseY);
 		}
-		for (int j = 0; j < 2; j++) {
-			for (int i = 1; i <= 3; i++) {
-//				if (select > EnumSkills.values().length - 1)
-//					break;
-				
-				
-				if (showLevel) {
-					GlStateManager.pushMatrix();
-					Minecraft.getMinecraft().getTextureManager().bindTexture(background);
-					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-					this.drawTexturedModalRect(x + 14, y + 2, 184, 0, 22, 14);
-					
-					Random r = new Random();
-					this.fontRendererObj.drawString(r.nextInt(80) + 10 + "", x + 19, y + 3, new Color(255, 63, 5).hashCode(), true);
-					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-					Minecraft.getMinecraft().getTextureManager().bindTexture(background);
-					GlStateManager.popMatrix();
-				}
-				
-				
-				y += 70;
-				select += 1;
-			}
-			
-			x += 70;
-			y = 20;
-		}
+		
+		this.drawTexturedModalRect(guiLeft + 40, guiTop + 141, 218, 105, 30, 22);
+		
+		this.drawTexturedModalRect(guiLeft + 80, guiTop + 141, 218, 127, 30, 22);
 	}
 	
 	@Override

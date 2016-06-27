@@ -18,23 +18,14 @@
  * No warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
  */
 
-package com.fatality.skillcraft.common.skills;
+package com.fatality.skillcraft.api.skills.api.utils;
 
-import com.fatality.skillcraft.api.skills.api.SkillBase;
-import com.fatality.skillcraft.api.skills.api.events.IHaveEvent;
-import com.fatality.skillcraft.common.skills.events.EventCooking;
+import com.fatality.skillcraft.api.skills.api.Level;
 
-import java.awt.*;
+import java.util.List;
 
-public class SkillCooking extends SkillBase implements IHaveEvent {
+public interface IHandleLevels {
 	
-	public SkillCooking() {
-		super("Cooking", 1);
-		setBadgeColour(new Color(160, 100, 40).hashCode());
-	}
+	List<Level> getSkillLevels();
 	
-	@Override
-	public Object getEventClass() {
-		return new EventCooking(this);
-	}
 }

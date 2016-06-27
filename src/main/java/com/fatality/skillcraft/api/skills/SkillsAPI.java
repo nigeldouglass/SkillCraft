@@ -20,7 +20,7 @@
 
 package com.fatality.skillcraft.api.skills;
 
-import com.fatality.skillcraft.api.skills.api.ISkillAPI;
+import com.fatality.skillcraft.api.skills.api.utils.ISkillAPI;
 
 public class SkillsAPI {
 	

@@ -26,21 +26,21 @@ public class Level {
 	private String title;
 	private String description;
 	
-	public Level(int level, String title, String description){
+	public Level(int level, String title, String description) {
 		this.level = level;
 		this.title = title;
 		this.description = description;
 	}
 	
-	public int getLevel(){
+	public int getLevel() {
 		return this.level;
 	}
 	
-	public String getTitle(){
+	public String getTitle() {
 		return this.title;
 	}
 	
-	public String getDescription(){
+	public String getDescription() {
 		return this.description;
 	}
 	

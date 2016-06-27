@@ -18,23 +18,69 @@
  * No warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
  */
 
-package com.fatality.skillcraft.common.skills;
+package com.fatality.skillcraft.api.skills.api;
 
-import com.fatality.skillcraft.api.skills.api.SkillBase;
-import com.fatality.skillcraft.api.skills.api.events.IHaveEvent;
-import com.fatality.skillcraft.common.skills.events.EventCooking;
+import com.fatality.skillcraft.api.skills.api.utils.ISkill;
+import net.minecraft.util.ResourceLocation;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class SkillCooking extends SkillBase implements IHaveEvent {
+public class SkillBase implements ISkill {
 	
-	public SkillCooking() {
-		super("Cooking", 1);
-		setBadgeColour(new Color(160, 100, 40).hashCode());
+	private String name;
+	private int defaultLevel;
+	private List<Level> skillLevels = new ArrayList<Level>();
+	private int badgeColour = new Color(0, 0, 0).hashCode();
+	
+	public SkillBase(String name, int defaultLevel) {
+		this.name = name;
+		this.defaultLevel = defaultLevel;
 	}
 	
 	@Override
-	public Object getEventClass() {
-		return new EventCooking(this);
+	public String getSkillName() {
+		return this.name;
 	}
+	
+	@Override
+	public int defaultLevel() {
+		return this.defaultLevel;
+	}
+	
+	@Override
+	public int getBadgeColour() {
+		return this.badgeColour;
+	}
+	
+	public void setBadgeColour(int badgeColour) {
+		this.badgeColour = badgeColour;
+	}
+	
+	@Override
+	public ResourceLocation getResourceLocation() {
+		return null;
+	}
+	
+	@Override
+	public int getIconX() {
+		return 0;
+	}
+	
+	@Override
+	public int getIconY() {
+		return 0;
+	}
+	
+	@Override
+	public List<Level> getSkillLevels() {
+		return this.skillLevels;
+	}
+	
+	public void addLevel(Level level) {
+		this.skillLevels.add(level);
+	}
+	
+	
 }

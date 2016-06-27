@@ -20,5 +20,12 @@
 
 package com.fatality.skillcraft.common.skills.events;
 
-public class EventForestry {
+import com.fatality.skillcraft.api.skills.api.SkillBase;
+import com.fatality.skillcraft.api.skills.api.events.IHandleEvents;
+
+public class EventForestry extends IHandleEvents {
+	
+	public EventForestry(SkillBase instance) {
+		super(instance);
+	}
 }

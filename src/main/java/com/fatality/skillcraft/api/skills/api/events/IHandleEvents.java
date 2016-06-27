@@ -20,17 +20,16 @@
 
 package com.fatality.skillcraft.api.skills.api.events;
 
-import com.fatality.skillcraft.api.skills.api.ISkill;
+import com.fatality.skillcraft.api.skills.api.SkillBase;
 
 public class IHandleEvents {
 	
-	public ISkill instance;
+	public SkillBase instance;
 	
 	/**
-	 *
 	 * @param instance passthrow the ISkill to be able to access in the event manager
 	 */
-	public IHandleEvents(ISkill instance){
+	public IHandleEvents(SkillBase instance) {
 		this.instance = instance;
 	}
 	

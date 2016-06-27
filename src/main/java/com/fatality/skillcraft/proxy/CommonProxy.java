@@ -24,7 +24,8 @@ import com.fatality.skillcraft.SkillCraft;
 import com.fatality.skillcraft.api.recipes.IRecipes;
 import com.fatality.skillcraft.api.skills.SkillRegistry;
 import com.fatality.skillcraft.api.skills.SkillsAPI;
-import com.fatality.skillcraft.api.skills.api.ISkill;
+import com.fatality.skillcraft.api.skills.api.SkillBase;
+import com.fatality.skillcraft.api.skills.api.events.IHaveEvent;
 import com.fatality.skillcraft.common.blocks.Blocks;
 import com.fatality.skillcraft.common.events.EventPlayer;
 import com.fatality.skillcraft.common.items.Items;
@@ -92,10 +93,11 @@ public class CommonProxy implements IProxy {
 	@Override
 	public void registerEvents() {
 		MinecraftForge.EVENT_BUS.register(new EventPlayer());
-		for (ISkill skill : SkillRegistry.instance().getRegisteredSkills()) {
-			if (skill.getEventClass() != null) {
-				MinecraftForge.EVENT_BUS.register(skill.getEventClass());
-			}
+		for (SkillBase skill : SkillRegistry.instance().getRegisteredSkills()) {
+			if (skill instanceof IHaveEvent)
+				if (((IHaveEvent) skill).getEventClass() != null) {
+					MinecraftForge.EVENT_BUS.register(((IHaveEvent) skill).getEventClass());
+				}
 		}
 	}
 }

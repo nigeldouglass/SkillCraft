@@ -115,7 +115,7 @@ public class INode {
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		gui.drawTexturedModalRect(guiXPos, guiYPos, 206, 0, 50, 50);
 		titleScale = 1F;
-		GuiHelper.addText(GuiHelper.getCenter(title, guiXPos, 50, titleScale), guiYPos + 55, title, titleScale, this.colour,
+		GuiHelper.addText(GuiHelper.getCenter(title, guiXPos, 50, titleScale), guiYPos + 55, title, titleScale, new Color(115, 110, 100).hashCode(),
 				false);
 		
 		//if (!getDescription().equals("")) {
@@ -132,19 +132,19 @@ public class INode {
 			}
 			
 			//Left Side
-			GuiHelper.drawRectWithUV(mouseX + 7, mouseY + 2, 184, 14, 1, 1, 1, 1, background);
-			GuiHelper.drawRectWithUV(mouseX + 7, mouseY + 3, 184, 15, 1, height, 1, 1, background);
-			GuiHelper.drawRectWithUV(mouseX + 7, mouseY + 3 + height, 184, height + 1, 1, 1, 1, 1, background);
+			GuiHelper.drawRectWithUV(mouseX + 7, mouseY + 2, 203, 0, 1, 1, 1, 1, background);
+			GuiHelper.drawRectWithUV(mouseX + 7, mouseY + 3, 203, 1, 1, height, 1, 1, background);
+			GuiHelper.drawRectWithUV(mouseX + 7, mouseY + 3 + height, 203, height + 1, 1, 1, 1, 1, background);
 			
 			//Middle
-			GuiHelper.drawRectWithUV(mouseX + 8, mouseY + 2, 185, 14, width, 1, 1, 1, background);
-			GuiHelper.drawRectWithUV(mouseX + 8, mouseY + 3, 185, 15, width, height, 1, 1, background);
-			GuiHelper.drawRectWithUV(mouseX + 8, mouseY + 3 + height, 185, 16, width, 1, 1, 1, background);
+			GuiHelper.drawRectWithUV(mouseX + 8, mouseY + 2, 204, 0, width, 1, 1, 1, background);
+			GuiHelper.drawRectWithUV(mouseX + 8, mouseY + 3, 204, 1, width, height, 1, 1, background);
+			GuiHelper.drawRectWithUV(mouseX + 8, mouseY + 3 + height, 204, 2, width, 1, 1, 1, background);
 			
 			//Right
-			GuiHelper.drawRectWithUV(mouseX + 8 + width, mouseY + 2, 186, 14, 1, 1, 1, 1, background);
-			GuiHelper.drawRectWithUV(mouseX + 8 + width, mouseY + 3, 186, 15, 1, height, 1, 1, background);
-			GuiHelper.drawRectWithUV(mouseX + 8 + width, mouseY + 3 + height, 186, 16, 1, 1, 1, 1, background);
+			GuiHelper.drawRectWithUV(mouseX + 8 + width, mouseY + 2, 205, 0, 1, 1, 1, 1, background);
+			GuiHelper.drawRectWithUV(mouseX + 8 + width, mouseY + 3, 205, 1, 1, height, 1, 1, background);
+			GuiHelper.drawRectWithUV(mouseX + 8 + width, mouseY + 3 + height, 205, 2, 1, 1, 1, 1, background);
 			
 			GuiHelper.addText(GuiHelper.getCenter(title, mouseX + 7, (int) Math.ceil(width), 0.85F), mouseY + 4, title, 0.85F, new Color(0, 0, 0).hashCode(),
 					false);

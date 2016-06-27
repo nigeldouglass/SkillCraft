@@ -20,53 +20,21 @@
 
 package com.fatality.skillcraft.common.skills;
 
-import com.fatality.skillcraft.api.skills.api.ISkill;
-import com.fatality.skillcraft.api.skills.api.Level;
+import com.fatality.skillcraft.api.skills.api.SkillBase;
+import com.fatality.skillcraft.api.skills.api.events.IHaveEvent;
 import com.fatality.skillcraft.common.skills.events.EventFishing;
-import net.minecraft.util.ResourceLocation;
 
 import java.awt.*;
-import java.util.*;
-import java.util.List;
 
-public class SkillFishing implements ISkill {
+public class SkillFishing extends SkillBase implements IHaveEvent {
+	
+	public SkillFishing() {
+		super("Fishing", 0);
+		setBadgeColour(new Color(92, 183, 255).hashCode());
+	}
+	
 	@Override
 	public Object getEventClass() {
-		return new EventFishing();
-	}
-	
-	@Override
-	public String getSkillName() {
-		return "Fishing";
-	}
-	
-	@Override
-	public int defaultLevel() {
-		return 1;
-	}
-	
-	@Override
-	public int getBadgeColour() {
-		return new Color(92, 183, 255).hashCode();
-	}
-	
-	@Override
-	public ResourceLocation getResourceLocation() {
-		return null;
-	}
-	
-	@Override
-	public int getIconX() {
-		return 0;
-	}
-	
-	@Override
-	public int getIconY() {
-		return 0;
-	}
-	
-	@Override
-	public List<Level> getSkillLevels() {
-		return null;
+		return new EventFishing(this);
 	}
 }

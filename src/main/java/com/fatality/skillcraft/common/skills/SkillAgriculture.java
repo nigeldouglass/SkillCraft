@@ -21,72 +21,37 @@
 package com.fatality.skillcraft.common.skills;
 
 import com.fatality.skillcraft.api.skills.api.Level;
+import com.fatality.skillcraft.api.skills.api.SkillBase;
 import com.fatality.skillcraft.api.skills.api.events.IHandlePlace;
-import com.fatality.skillcraft.api.skills.api.ISkill;
+import com.fatality.skillcraft.api.skills.api.events.IHaveEvent;
 import com.fatality.skillcraft.common.skills.events.EventAgriculture;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.ResourceLocation;
 
 import java.awt.*;
-import java.util.*;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-public class SkillAgriculture implements ISkill, IHandlePlace {
+public class SkillAgriculture extends SkillBase implements IHaveEvent, IHandlePlace {
 	
-	List<Level> levels = new ArrayList<Level>();
-	
-	public SkillAgriculture(){
-		levels.add(new Level(1, "New World", "A whole new world."));
-		levels.add(new Level(3, "Every Grower Helps", "Growing the world."));
-		levels.add(new Level(7, "Plantation", "We are ready for harvest."));
-		levels.add(new Level(13, "Expansion", "Trials are coming."));
-	}
-	
-	@Override
-	public Object getEventClass() {
-		return new EventAgriculture(this);
-	}
-	
-	@Override
-	public String getSkillName() {
-		return "Agriculture";
-	}
-	
-	@Override
-	public int defaultLevel() {
-		return 0;
-	}
-	
-	@Override
-	public int getBadgeColour() {
-		return new Color(16, 63, 12).hashCode();
-	}
-	
-	@Override
-	public ResourceLocation getResourceLocation() {
-		return null;
-	}
-	
-	@Override
-	public int getIconX() {
-		return 0;
-	}
-	
-	@Override
-	public int getIconY() {
-		return 0;
+	public SkillAgriculture() {
+		super("Agriculture", 1);
+		addLevel(new Level(1, "New World", "A whole new world."));
+		addLevel(new Level(3, "Every Grower Helps", "Growing the world."));
+		addLevel(new Level(7, "Plantation", "We are ready for harvest."));
+		addLevel(new Level(13, "Expansion", "Trials are coming."));
+		setBadgeColour(new Color(16, 63, 12).hashCode());
 	}
 	
 	@Override
 	public Map<Block, Integer> getBlocksPlaced() {
-		Map<Block, Integer> blocks =  new HashMap<Block, Integer>();
+		Map<Block, Integer> blocks = new HashMap<Block, Integer>();
 		blocks.put(Blocks.CACTUS, 5);
 		return blocks;
 	}
 	
 	@Override
-	public List<Level> getSkillLevels() {
-		return this.levels;
+	public Object getEventClass() {
+		return new EventAgriculture(this);
 	}
 }

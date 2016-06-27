@@ -20,25 +20,25 @@
 
 package com.fatality.skillcraft.api.skills;
 
-import com.fatality.skillcraft.api.skills.api.ISkill;
-import com.fatality.skillcraft.api.skills.api.ISkillRegistry;
+import com.fatality.skillcraft.api.skills.api.SkillBase;
+import com.fatality.skillcraft.api.skills.api.utils.ISkillRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SkillRegistry implements ISkillRegistry<ISkill> {
+public class SkillRegistry implements ISkillRegistry<SkillBase> {
 	
 	private static final SkillRegistry instance = new SkillRegistry();
-	private List<ISkill> registry = new ArrayList<ISkill>();
+	private List<SkillBase> registry = new ArrayList<SkillBase>();
 	
 	public static SkillRegistry instance() {
 		return instance;
 	}
 	
 	@Override
-	public ISkill registerSkill(Class<? extends ISkill> skillClass) {
+	public SkillBase registerSkill(Class<? extends SkillBase> skillClass) {
 		try {
-			ISkill skill = skillClass.getConstructor().newInstance();
+			SkillBase skill = skillClass.getConstructor().newInstance();
 			if (skill == null)
 				throw new RuntimeException(String.format("Cannot register a null skill to Skill Registry caused by %s", skill.getClass()));
 			if (skill.getSkillName().isEmpty())
@@ -53,7 +53,7 @@ public class SkillRegistry implements ISkillRegistry<ISkill> {
 	}
 	
 	@Override
-	public List<ISkill> getRegisteredSkills() {
+	public List<SkillBase> getRegisteredSkills() {
 		return registry;
 	}
 }

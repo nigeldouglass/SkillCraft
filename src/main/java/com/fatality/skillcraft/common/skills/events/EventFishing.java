@@ -20,5 +20,12 @@
 
 package com.fatality.skillcraft.common.skills.events;
 
-public class EventFishing {
+import com.fatality.skillcraft.api.skills.api.SkillBase;
+import com.fatality.skillcraft.api.skills.api.events.IHandleEvents;
+
+public class EventFishing extends IHandleEvents {
+	
+	public EventFishing(SkillBase instance) {
+		super(instance);
+	}
 }

@@ -21,19 +21,19 @@
 package com.fatality.skillcraft.common.skills;
 
 import com.fatality.skillcraft.api.skills.SkillRegistry;
-import com.fatality.skillcraft.api.skills.api.ISkill;
+import com.fatality.skillcraft.api.skills.api.SkillBase;
+import com.fatality.skillcraft.api.skills.api.utils.ISkill;
 
 public enum Skills {
 	SKILL_AGRICULTURE(SkillAgriculture.class),
 	SKILL_COOKING(SkillCooking.class),
 	SKILL_FISHING(SkillFishing.class),
-	SKILL_FORESTRY(SkillForestry.class),
-	;
+	SKILL_FORESTRY(SkillForestry.class),;
 	
-	private final Class<? extends ISkill> skillClass;
+	private final Class<? extends SkillBase> skillClass;
 	private ISkill skill;
 	
-	Skills(Class<? extends ISkill> skillClass) {
+	Skills(Class<? extends SkillBase> skillClass) {
 		this.skillClass = skillClass;
 	}
 	

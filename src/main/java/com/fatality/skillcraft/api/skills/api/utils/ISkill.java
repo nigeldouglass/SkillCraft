@@ -18,13 +18,23 @@
  * No warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
  */
 
-package com.fatality.skillcraft.api.skills.api;
+package com.fatality.skillcraft.api.skills.api.utils;
 
-import java.util.Collection;
+import net.minecraft.util.ResourceLocation;
 
-public interface ISkillRegistry<T> {
+public interface ISkill extends IHandleLevels {
 	
-	ISkill registerSkill(Class<? extends T> skill);
+	String getSkillName();
 	
-	Collection<T> getRegisteredSkills();
+	int defaultLevel();
+	
+	int getBadgeColour();
+	
+	ResourceLocation getResourceLocation();
+	
+	int getIconX();
+	
+	int getIconY();
+	
+	
 }

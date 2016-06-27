@@ -20,5 +20,12 @@
 
 package com.fatality.skillcraft.common.skills.events;
 
-public class EventCooking {
+import com.fatality.skillcraft.api.skills.api.SkillBase;
+import com.fatality.skillcraft.api.skills.api.events.IHandleEvents;
+
+public class EventCooking extends IHandleEvents {
+	
+	public EventCooking(SkillBase instance) {
+		super(instance);
+	}
 }

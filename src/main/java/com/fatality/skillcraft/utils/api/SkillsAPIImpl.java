@@ -21,13 +21,13 @@
 package com.fatality.skillcraft.utils.api;
 
 import com.fatality.skillcraft.api.skills.SkillRegistry;
-import com.fatality.skillcraft.api.skills.api.ISkill;
-import com.fatality.skillcraft.api.skills.api.ISkillAPI;
-import com.fatality.skillcraft.api.skills.api.ISkillRegistry;
+import com.fatality.skillcraft.api.skills.api.SkillBase;
+import com.fatality.skillcraft.api.skills.api.utils.ISkillAPI;
+import com.fatality.skillcraft.api.skills.api.utils.ISkillRegistry;
 
 public class SkillsAPIImpl implements ISkillAPI {
 	@Override
-	public ISkillRegistry<ISkill> skillRegistry() {
+	public ISkillRegistry<SkillBase> skillRegistry() {
 		return SkillRegistry.instance();
 	}
 }
