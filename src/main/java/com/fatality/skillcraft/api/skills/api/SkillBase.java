@@ -21,6 +21,9 @@
 package com.fatality.skillcraft.api.skills.api;
 
 import com.fatality.skillcraft.api.skills.api.utils.ISkill;
+import com.fatality.skillcraft.utils.ModInfo;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.util.ResourceLocation;
 
 import java.awt.*;
@@ -29,6 +32,7 @@ import java.util.List;
 
 public class SkillBase implements ISkill {
 	
+	public final ResourceLocation background = new ResourceLocation(ModInfo.MOD_ID,"textures/gui/skillbook_1.png");
 	private String name;
 	private int defaultLevel;
 	private List<Level> skillLevels = new ArrayList<Level>();
@@ -80,6 +84,14 @@ public class SkillBase implements ISkill {
 	
 	public void addLevel(Level level) {
 		this.skillLevels.add(level);
+	}
+	
+	public void renderGUIBackground(Gui gui, float partialTicks, int mouseX, int mouseY, int guiLeft, int guiTop) {
+		Minecraft.getMinecraft().getTextureManager().bindTexture(background);
+		gui.drawTexturedModalRect(guiLeft, guiTop, 0, 0, 160, 203);
+	}
+	
+	public void renderGUIForground(Gui gui, float partialTicks, int mouseX, int mouseY, int guiLeft, int guiTop) {
 	}
 	
 	

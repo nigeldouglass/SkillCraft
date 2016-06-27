@@ -33,11 +33,7 @@ public class INode {
 	
 	public final ResourceLocation background = new ResourceLocation(ModInfo.MOD_ID + ":textures/gui/skillbook.png");
 	private int guiXPos, guiYPos;
-	private String guiIcon;
-	private float guiIconScale;
-	private int iconXOffset, iconYOffset;
 	private String title;
-	private String description;
 	private float titleScale = 0.86F;
 	private int colour;
 	
@@ -45,57 +41,8 @@ public class INode {
 	             String title, int colour) {
 		this.guiXPos = guiXPos;
 		this.guiYPos = guiYPos;
-		this.guiIcon = guiIcon;
-		this.guiIconScale = guiIconScale;
-		this.iconXOffset = iconXOffset;
-		this.iconYOffset = iconYOffset;
 		this.title = title;
 		this.colour = colour;
-	}
-	
-	private void parsDescription(String description) {
-		String parsDescription = "";
-		String currentLine = "";
-		for (int i = 0; i < description.length(); i++) {
-			
-			if (Minecraft.getMinecraft().fontRendererObj.getStringWidth(currentLine) < 120) {
-				currentLine += description.charAt(i);
-			} else {
-				parsDescription += currentLine;
-				currentLine = "";
-				if (!(description.charAt(i) + "").equalsIgnoreCase(" ")) {
-					currentLine = "" + description.charAt(i);
-				}
-			}
-			if (i == description.length() - 1) {
-				parsDescription += currentLine;
-			}
-		}
-		this.description = parsDescription;
-	}
-	
-	public int getGUIXPos() {
-		return this.guiXPos;
-	}
-	
-	public int getGUIYPos() {
-		return this.guiYPos;
-	}
-	
-	public Item getGUIIcon() {
-		return GameRegistry.findItem("minecraft", this.guiIcon);
-	}
-	
-	public String getTitle() {
-		return this.title;
-	}
-	
-	public String getDescription() {
-		return this.description;
-	}
-	
-	public void setTitleScale(float scale) {
-		this.titleScale = scale;
 	}
 	
 	public void render(GuiContainer gui, int mouseX, int mouseY) {
@@ -118,7 +65,6 @@ public class INode {
 		GuiHelper.addText(GuiHelper.getCenter(title, guiXPos, 50, titleScale), guiYPos + 55, title, titleScale, new Color(115, 110, 100).hashCode(),
 				false);
 		
-		//if (!getDescription().equals("")) {
 		if ((mouseX >= guiXPos && mouseY >= guiYPos) && (mouseX <= guiXPos + 55 && mouseY <= guiYPos + 55)) {
 			
 			GlStateManager.pushMatrix();
@@ -163,7 +109,6 @@ public class INode {
 			
 			GlStateManager.popMatrix();
 		}
-		//}
 		
 		Minecraft.getMinecraft().getTextureManager().bindTexture(background);
 	}

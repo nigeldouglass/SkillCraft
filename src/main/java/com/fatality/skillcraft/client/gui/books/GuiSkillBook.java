@@ -39,10 +39,11 @@ import java.util.List;
 public class GuiSkillBook extends GuiContainer {
 	
 	public final ResourceLocation background = new ResourceLocation(ModInfo.MOD_ID + ":textures/gui/skillbook.png");
+	public final ResourceLocation backgroundPage = new ResourceLocation(ModInfo.MOD_ID + ":textures/gui/skillbook_1.png");
 	private EntityPlayer player;
 	private boolean showLevel = false;
 	
-	private float test = 0.0f;
+	private int selectedSkill = -1;
 	
 	private List<INode> skillNodes = new ArrayList<INode>();
 	
@@ -72,20 +73,31 @@ public class GuiSkillBook extends GuiContainer {
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
 		Minecraft.getMinecraft().getTextureManager().bindTexture(background);
-		
 		this.drawTexturedModalRect(guiLeft, guiTop - 30, 0, 0, 160, 203);
-		
-		GuiHelper.addText(GuiHelper.getCenter("Skill Book", guiLeft, 160, 2F), guiTop - 20, "Skill Book", 2F, new Color(180, 170, 150).hashCode(),
-				false);
-		Minecraft.getMinecraft().getTextureManager().bindTexture(background);
-		
-		for (int i = 0; i < skillNodes.size(); i++) {
-			skillNodes.get(i).render(this, mouseX, mouseY);
+		selectedSkill = 0;
+		if(selectedSkill == -1) {
+			
+			Minecraft.getMinecraft().getTextureManager().bindTexture(backgroundPage);
+			this.drawTexturedModalRect(guiLeft + 6, guiTop - 23, 0, 0, 160, 203);
+			
+			GuiHelper.addText(GuiHelper.getCenter("Skill Book", guiLeft, 160, 2F), guiTop - 20, "Skill Book", 2F, new Color(180, 170, 150).hashCode(),
+					false);
+			Minecraft.getMinecraft().getTextureManager().bindTexture(background);
+			
+			for (int i = 0; i < skillNodes.size(); i++) {
+				skillNodes.get(i).render(this, mouseX, mouseY);
+			}
+			
+			this.drawTexturedModalRect(guiLeft + 40, guiTop + 141, 218, 105, 30, 22);
+			
+			this.drawTexturedModalRect(guiLeft + 80, guiTop + 141, 218, 127, 30, 22);
+		}else{
+			SkillBase skill = SkillRegistry.instance().getRegisteredSkills().get(selectedSkill);
+			skill.renderGUIBackground(this, partialTicks, mouseX, mouseY, guiLeft + 6, guiTop - 23);
+			GuiHelper.addText(GuiHelper.getCenter(skill.getSkillName(), guiLeft, 160, 2F), guiTop - 20, skill.getSkillName(), 2F, new Color(180, 170, 150).hashCode(),
+					false);
+			Minecraft.getMinecraft().getTextureManager().bindTexture(background);
 		}
-		
-		this.drawTexturedModalRect(guiLeft + 40, guiTop + 141, 218, 105, 30, 22);
-		
-		this.drawTexturedModalRect(guiLeft + 80, guiTop + 141, 218, 127, 30, 22);
 	}
 	
 	@Override
