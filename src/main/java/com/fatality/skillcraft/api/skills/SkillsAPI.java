@@ -30,7 +30,7 @@ public class SkillsAPI {
 		return instance;
 	}
 	
-	public static void setup(ISkillAPI instance){
+	public static void setup(ISkillAPI instance) {
 		SkillsAPI.instance = instance;
 	}
 	

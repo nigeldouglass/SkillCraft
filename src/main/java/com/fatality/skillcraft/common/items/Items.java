@@ -26,8 +26,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public enum Items {
-	ITEM_SKILL_BOOK(ItemBook.class),
-	;
+	ITEM_SKILL_BOOK(ItemBook.class),;
 	
 	private final Class<? extends Item> itemClass;
 	private Item item;

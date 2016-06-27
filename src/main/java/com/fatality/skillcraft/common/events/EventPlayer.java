@@ -33,7 +33,7 @@ public class EventPlayer {
 	public void firstJoin(PlayerEvent.PlayerLoggedInEvent event) {
 		EntityPlayer player = event.player;
 		NBTTagCompound entityData = player.getEntityData();
-		if(!entityData.getBoolean("joinedBefore")) {
+		if (!entityData.getBoolean("joinedBefore")) {
 			entityData.setBoolean("joinedBefore", true);
 			player.inventory.addItemStackToInventory(new ItemStack(Items.ITEM_SKILL_BOOK.getItem()));
 		}

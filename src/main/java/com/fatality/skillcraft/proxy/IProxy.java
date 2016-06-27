@@ -20,8 +20,6 @@
 
 package com.fatality.skillcraft.proxy;
 
-import java.lang.reflect.InvocationTargetException;
-
 public interface IProxy {
 	
 	void initialiseAPI();

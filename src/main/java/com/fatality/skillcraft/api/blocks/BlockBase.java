@@ -53,6 +53,6 @@ public abstract class BlockBase extends Block {
 		String unlocalizedName = super.getUnlocalizedName();
 		unlocalizedName = unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
 		
-		return String.format("tile.%s.%s.%s",ModInfo.MOD_ID ,groupName,unlocalizedName);
+		return String.format("tile.%s.%s.%s", ModInfo.MOD_ID, groupName, unlocalizedName);
 	}
 }

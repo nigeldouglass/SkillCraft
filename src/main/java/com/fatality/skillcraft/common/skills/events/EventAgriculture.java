@@ -29,7 +29,7 @@ public class EventAgriculture {
 	@SubscribeEvent
 	public void firstJoin(PlayerEvent.PlayerLoggedInEvent event) {
 		EntityPlayer player = event.player;
-		System.out.println(player.getName()+" has entered the game");
+		System.out.println(player.getName() + " has entered the game");
 	}
 	
 }

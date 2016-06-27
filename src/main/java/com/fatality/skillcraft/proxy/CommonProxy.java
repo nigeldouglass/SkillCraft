@@ -25,16 +25,14 @@ import com.fatality.skillcraft.api.recipes.IRecipes;
 import com.fatality.skillcraft.api.skills.SkillRegistry;
 import com.fatality.skillcraft.api.skills.SkillsAPI;
 import com.fatality.skillcraft.api.skills.api.ISkill;
-import com.fatality.skillcraft.common.skills.Skills;
-import com.fatality.skillcraft.utils.GuiHandler;
 import com.fatality.skillcraft.common.blocks.Blocks;
 import com.fatality.skillcraft.common.events.EventPlayer;
 import com.fatality.skillcraft.common.items.Items;
+import com.fatality.skillcraft.common.skills.Skills;
+import com.fatality.skillcraft.utils.GuiHandler;
 import com.fatality.skillcraft.utils.api.SkillsAPIImpl;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
-
-import java.lang.reflect.InvocationTargetException;
 
 public class CommonProxy implements IProxy {
 	@Override

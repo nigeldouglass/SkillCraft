@@ -23,15 +23,13 @@ package com.fatality.skillcraft.api.utils;
 import net.minecraft.util.IStringSerializable;
 
 import java.awt.*;
-import java.util.Arrays;
 
 public enum EnumSkills implements IStringSerializable {
 	AGRICULTURE("Agriculture", 0, new Color(16, 63, 12).hashCode()),
 	MINING("Mining", 1, new Color(130, 130, 130).hashCode()),
 	FISHING("Fishing", 2, new Color(92, 183, 255).hashCode()),
 	FORESTRY("Forestry", 3, new Color(60, 125, 5).hashCode()),
-	COOKING("Cooking", 4, new Color(160, 100, 40).hashCode()),
-	;
+	COOKING("Cooking", 4, new Color(160, 100, 40).hashCode()),;
 	
 	private static final EnumSkills[] META = new EnumSkills[values().length];
 	

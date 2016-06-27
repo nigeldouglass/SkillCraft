@@ -23,9 +23,7 @@ package com.fatality.skillcraft.utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -136,32 +134,32 @@ public class INode {
 			//Left Side
 			GuiHelper.drawRectWithUV(mouseX + 7, mouseY + 2, 184, 14, 1, 1, 1, 1, background);
 			GuiHelper.drawRectWithUV(mouseX + 7, mouseY + 3, 184, 15, 1, height, 1, 1, background);
-			GuiHelper.drawRectWithUV(mouseX + 7, mouseY + 3 + height, 184, height+1, 1, 1, 1, 1, background);
+			GuiHelper.drawRectWithUV(mouseX + 7, mouseY + 3 + height, 184, height + 1, 1, 1, 1, 1, background);
 			
 			//Middle
 			GuiHelper.drawRectWithUV(mouseX + 8, mouseY + 2, 185, 14, width, 1, 1, 1, background);
 			GuiHelper.drawRectWithUV(mouseX + 8, mouseY + 3, 185, 15, width, height, 1, 1, background);
-			GuiHelper.drawRectWithUV(mouseX + 8, mouseY + 3+height, 185, 16, width, 1, 1, 1, background);
+			GuiHelper.drawRectWithUV(mouseX + 8, mouseY + 3 + height, 185, 16, width, 1, 1, 1, background);
 			
 			//Right
 			GuiHelper.drawRectWithUV(mouseX + 8 + width, mouseY + 2, 186, 14, 1, 1, 1, 1, background);
 			GuiHelper.drawRectWithUV(mouseX + 8 + width, mouseY + 3, 186, 15, 1, height, 1, 1, background);
-			GuiHelper.drawRectWithUV(mouseX + 8 + width, mouseY + 3+height, 186, 16, 1, 1, 1, 1, background);
+			GuiHelper.drawRectWithUV(mouseX + 8 + width, mouseY + 3 + height, 186, 16, 1, 1, 1, 1, background);
 			
 			System.out.println(Minecraft.getMinecraft().fontRendererObj.getStringWidth(title) * 1.25F);
-			GuiHelper.addText(GuiHelper.getCenter(title, mouseX + 7, (int) Math.ceil(width), 0.85F), mouseY + 4, title, 0.85F, new Color(0,0,0).hashCode(),
+			GuiHelper.addText(GuiHelper.getCenter(title, mouseX + 7, (int) Math.ceil(width), 0.85F), mouseY + 4, title, 0.85F, new Color(0, 0, 0).hashCode(),
 					false);
 			
-			GuiHelper.addText(mouseX + 10, mouseY + 14, "Level: ", 0.85F, new Color(30,125,190).hashCode(),
+			GuiHelper.addText(mouseX + 10, mouseY + 14, "Level: ", 0.85F, new Color(30, 125, 190).hashCode(),
 					true);
 			
-			GuiHelper.addText(mouseX + 40, mouseY + 14, "55", 0.85F, new Color(30,125,190).hashCode(),
+			GuiHelper.addText(mouseX + 40, mouseY + 14, "55", 0.85F, new Color(30, 125, 190).hashCode(),
 					true);
 			
-			GuiHelper.addText(mouseX + 10, mouseY + 24, "Exp: ", 0.85F, new Color(45,150,9).hashCode(),
+			GuiHelper.addText(mouseX + 10, mouseY + 24, "Exp: ", 0.85F, new Color(45, 150, 9).hashCode(),
 					true);
 			
-			GuiHelper.addText(mouseX + 30, mouseY + 24, experience.getRequireExp(55)+"", 0.85F, new Color(45,150,9).hashCode(),
+			GuiHelper.addText(mouseX + 30, mouseY + 24, experience.getRequireExp(55) + "", 0.85F, new Color(45, 150, 9).hashCode(),
 					true);
 			
 			GlStateManager.popMatrix();

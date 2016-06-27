@@ -36,7 +36,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
-public class ItemBook extends ItemBase implements IRecipes{
+public class ItemBook extends ItemBase implements IRecipes {
 	public ItemBook() {
 		super("skillbook", "books");
 		this.setCreativeTab(SkillCraftCreativeTabs.GENERAL);

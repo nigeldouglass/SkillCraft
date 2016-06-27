@@ -38,6 +38,11 @@ public class SkillAgriculture implements ISkill {
 	}
 	
 	@Override
+	public int defaultLevel() {
+		return 0;
+	}
+	
+	@Override
 	public int getBadgeColour() {
 		return new Color(16, 63, 12).hashCode();
 		/*

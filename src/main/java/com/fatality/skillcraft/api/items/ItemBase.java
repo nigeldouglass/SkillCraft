@@ -22,7 +22,6 @@ package com.fatality.skillcraft.api.items;
 
 import com.fatality.skillcraft.utils.ModInfo;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 
 public abstract class ItemBase extends Item {
 	

@@ -20,9 +20,6 @@
 
 package com.fatality.skillcraft.utils;
 
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
-
 public class experience {
 	
 	public static int getRequireExp(int level) {

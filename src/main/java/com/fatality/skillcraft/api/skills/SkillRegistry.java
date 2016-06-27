@@ -45,7 +45,7 @@ public class SkillRegistry implements ISkillRegistry<ISkill> {
 				throw new RuntimeException(String.format("Cannot register a skill with no name to Skill Registry caused by %s", skill.getClass()));
 			
 			registry.add(skill);
-			System.out.println("registered "+skill.getSkillName());
+			System.out.println("registered " + skill.getSkillName());
 			return skill;
 		} catch (Exception e) {
 			e.printStackTrace();

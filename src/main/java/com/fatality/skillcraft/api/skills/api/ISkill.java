@@ -26,6 +26,8 @@ public interface ISkill extends IHandleEvents {
 	
 	public String getSkillName();
 	
+	public int defaultLevel();
+	
 	public int getBadgeColour();
 	
 	public ResourceLocation getResourceLocation();

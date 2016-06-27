@@ -20,17 +20,11 @@
 
 package com.fatality.skillcraft.common.skills;
 
-import com.fatality.skillcraft.api.blocks.BlockBase;
 import com.fatality.skillcraft.api.skills.SkillRegistry;
 import com.fatality.skillcraft.api.skills.api.ISkill;
-import com.fatality.skillcraft.utils.Register;
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
 
 public enum Skills {
-	SKILL_AGRICULTURE(SkillAgriculture.class),
-	;
+	SKILL_AGRICULTURE(SkillAgriculture.class),;
 	
 	private final Class<? extends ISkill> skillClass;
 	private ISkill skill;
