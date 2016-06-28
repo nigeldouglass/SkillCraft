@@ -18,14 +18,38 @@
  * No warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
  */
 
-package com.fatality.skillcraft.common.skills.events;
+package com.fatality.skillcraft.common.skills.data;
 
-import com.fatality.skillcraft.api.skills.api.SkillBase;
-import com.fatality.skillcraft.api.skills.api.events.IHandleEvents;
-
-public class EventFishing extends IHandleEvents {
+public class PlayerSkill {
 	
-	public EventFishing(SkillBase instance) {
-		super(instance);
+	private String name;
+	private int level;
+	private int exp;
+	
+	public PlayerSkill(String name, int level, int exp) {
+		this.name = name;
+		this.level = level;
+		this.exp = exp;
 	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public int getLevel() {
+		return level;
+	}
+	
+	public void setLevel(int level) {
+		this.level = level;
+	}
+	
+	public int getExp() {
+		return exp;
+	}
+	
+	public void setExp(int exp) {
+		this.exp = exp;
+	}
+	
 }

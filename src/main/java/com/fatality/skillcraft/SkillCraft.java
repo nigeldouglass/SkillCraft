@@ -20,8 +20,12 @@
 
 package com.fatality.skillcraft;
 
+import com.fatality.skillcraft.common.skills.data.ISkillCapability;
+import com.fatality.skillcraft.common.skills.data.SkillCapability;
+import com.fatality.skillcraft.common.skills.data.SkillCapability.SkillsCapabilityHandler;
 import com.fatality.skillcraft.proxy.IProxy;
 import com.fatality.skillcraft.utils.ModInfo;
+import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -53,6 +57,8 @@ public class SkillCraft {
 		proxy.registerWorldGen();
 		proxy.registerGUIs();
 		proxy.registerRenderers();
+		
+		CapabilityManager.INSTANCE.register(ISkillCapability.class, SkillsCapabilityHandler.handler, SkillCapability.class);
 	}
 	
 	@Mod.EventHandler

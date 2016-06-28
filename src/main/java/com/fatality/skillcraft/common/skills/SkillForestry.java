@@ -21,20 +21,13 @@
 package com.fatality.skillcraft.common.skills;
 
 import com.fatality.skillcraft.api.skills.api.SkillBase;
-import com.fatality.skillcraft.api.skills.api.events.IHaveEvent;
-import com.fatality.skillcraft.common.skills.events.EventForestry;
 
 import java.awt.*;
 
-public class SkillForestry extends SkillBase implements IHaveEvent {
+public class SkillForestry extends SkillBase {
 	
 	public SkillForestry() {
 		super("Forestry", 1);
 		setBadgeColour(new Color(60, 125, 5).hashCode());
-	}
-	
-	@Override
-	public Object getEventClass() {
-		return new EventForestry(this);
 	}
 }

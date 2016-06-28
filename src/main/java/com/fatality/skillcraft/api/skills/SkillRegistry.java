@@ -56,4 +56,13 @@ public class SkillRegistry implements ISkillRegistry<SkillBase> {
 	public List<SkillBase> getRegisteredSkills() {
 		return registry;
 	}
+	
+	@Override
+	public SkillBase findSkill(String skill) {
+		for (SkillBase s : registry) {
+			if (s.getSkillName().equalsIgnoreCase(skill))
+				return s;
+		}
+		return null;
+	}
 }

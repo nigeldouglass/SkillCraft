@@ -18,14 +18,23 @@
  * No warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
  */
 
-package com.fatality.skillcraft.common.skills.events;
+package com.fatality.skillcraft.common.skills.data;
 
-import com.fatality.skillcraft.api.skills.api.SkillBase;
-import com.fatality.skillcraft.api.skills.api.events.IHandleEvents;
+import net.minecraft.nbt.NBTTagCompound;
 
-public class EventCooking extends IHandleEvents {
+import java.util.List;
+
+public interface ISkillCapability {
 	
-	public EventCooking(SkillBase instance) {
-		super(instance);
-	}
+	PlayerSkill getSkill(String name);
+	
+	List<PlayerSkill> getAllSkills();
+	
+	void updateSkill(String name, int level, int exp);
+	
+	void addSkill(PlayerSkill level);
+	
+	NBTTagCompound saveNBTData();
+	
+	void loadNBTData(NBTTagCompound nbt);
 }

@@ -23,15 +23,13 @@ package com.fatality.skillcraft.utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.awt.*;
 
 public class INode {
 	
-	public final ResourceLocation background = new ResourceLocation(ModInfo.MOD_ID + ":textures/gui/skillbook.png");
+	public final ResourceLocation background = new ResourceLocation(ModInfo.MOD_ID + ":textures/guis/skillbook.png");
 	private int guiXPos, guiYPos;
 	private String title;
 	private float titleScale = 0.86F;

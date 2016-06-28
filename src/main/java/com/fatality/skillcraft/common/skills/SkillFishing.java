@@ -20,21 +20,16 @@
 
 package com.fatality.skillcraft.common.skills;
 
+import com.fatality.skillcraft.api.skills.api.Level;
 import com.fatality.skillcraft.api.skills.api.SkillBase;
-import com.fatality.skillcraft.api.skills.api.events.IHaveEvent;
-import com.fatality.skillcraft.common.skills.events.EventFishing;
 
 import java.awt.*;
 
-public class SkillFishing extends SkillBase implements IHaveEvent {
+public class SkillFishing extends SkillBase {
 	
 	public SkillFishing() {
 		super("Fishing", 0);
 		setBadgeColour(new Color(92, 183, 255).hashCode());
-	}
-	
-	@Override
-	public Object getEventClass() {
-		return new EventFishing(this);
+		addLevel(new Level(13, "Fishing master", "Trials."));
 	}
 }

@@ -29,4 +29,6 @@ public interface ISkillRegistry<T> {
 	SkillBase registerSkill(Class<? extends T> skill);
 	
 	Collection<T> getRegisteredSkills();
+	
+	T findSkill(String skill);
 }

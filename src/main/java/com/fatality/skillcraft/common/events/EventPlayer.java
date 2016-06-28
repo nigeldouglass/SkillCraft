@@ -20,22 +20,47 @@
 
 package com.fatality.skillcraft.common.events;
 
+import com.fatality.skillcraft.api.skills.SkillRegistry;
+import com.fatality.skillcraft.api.skills.api.SkillBase;
 import com.fatality.skillcraft.common.items.Items;
+import com.fatality.skillcraft.common.skills.data.PlayerSkill;
+import com.fatality.skillcraft.common.skills.data.SkillCapability;
+import com.fatality.skillcraft.common.skills.data.SkillProvider;
+import com.fatality.skillcraft.utils.ModInfo;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 public class EventPlayer {
 	
 	@SubscribeEvent
-	public void firstJoin(PlayerEvent.PlayerLoggedInEvent event) {
-		EntityPlayer player = event.player;
-		NBTTagCompound entityData = player.getEntityData();
-		if (!entityData.getBoolean("joinedBefore")) {
-			entityData.setBoolean("joinedBefore", true);
-			player.inventory.addItemStackToInventory(new ItemStack(Items.ITEM_SKILL_BOOK.getItem()));
+	public void firstJoin(EntityJoinWorldEvent event) {
+		if (event.getEntity() instanceof EntityPlayer) {
+			EntityPlayer player = (EntityPlayer) event.getEntity();
+			NBTTagCompound entityData = player.getEntityData();
+			if (!entityData.getBoolean("joinedBefore")) {
+				entityData.setBoolean("joinedBefore", true);
+				player.inventory.addItemStackToInventory(new ItemStack(Items.ITEM_SKILL_BOOK.getItem()));
+			}
+			
+			if (event.getEntity() instanceof EntityPlayer) // can be replaces by if (e.entity instanceof EntityPlayerMP)
+			{
+				for (SkillBase skills : SkillRegistry.instance().getRegisteredSkills()) {
+					SkillProvider.get((EntityPlayer) event.getEntity()).addSkill(new PlayerSkill(skills.getSkillName(), skills.defaultLevel(), 0));
+				}
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	public void AttachCapability(AttachCapabilitiesEvent.Entity event) {
+		if (!event.getEntity().hasCapability(SkillProvider.SKILLS, null) && event.getEntity() instanceof EntityPlayer) {
+			event.addCapability(new ResourceLocation(ModInfo.MOD_NAME, "skills"), new SkillProvider(new SkillCapability()));
+			
 		}
 	}
 }

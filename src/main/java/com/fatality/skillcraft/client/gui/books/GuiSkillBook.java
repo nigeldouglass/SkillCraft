@@ -38,8 +38,8 @@ import java.util.List;
 
 public class GuiSkillBook extends GuiContainer {
 	
-	public final ResourceLocation background = new ResourceLocation(ModInfo.MOD_ID + ":textures/gui/skillbook.png");
-	public final ResourceLocation backgroundPage = new ResourceLocation(ModInfo.MOD_ID + ":textures/gui/skillbook_1.png");
+	public final ResourceLocation background = new ResourceLocation(ModInfo.MOD_ID + ":textures/guis/skillbook.png");
+	public final ResourceLocation backgroundPage = new ResourceLocation(ModInfo.MOD_ID + ":textures/guis/skillbook_1.png");
 	private EntityPlayer player;
 	private boolean showLevel = false;
 	
@@ -74,8 +74,8 @@ public class GuiSkillBook extends GuiContainer {
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
 		Minecraft.getMinecraft().getTextureManager().bindTexture(background);
 		this.drawTexturedModalRect(guiLeft, guiTop - 30, 0, 0, 160, 203);
-		selectedSkill = 0;
-		if(selectedSkill == -1) {
+		selectedSkill = 1;
+		if (selectedSkill == -1) {
 			
 			Minecraft.getMinecraft().getTextureManager().bindTexture(backgroundPage);
 			this.drawTexturedModalRect(guiLeft + 6, guiTop - 23, 0, 0, 160, 203);
@@ -91,12 +91,16 @@ public class GuiSkillBook extends GuiContainer {
 			this.drawTexturedModalRect(guiLeft + 40, guiTop + 141, 218, 105, 30, 22);
 			
 			this.drawTexturedModalRect(guiLeft + 80, guiTop + 141, 218, 127, 30, 22);
-		}else{
+		} else {
 			SkillBase skill = SkillRegistry.instance().getRegisteredSkills().get(selectedSkill);
 			skill.renderGUIBackground(this, partialTicks, mouseX, mouseY, guiLeft + 6, guiTop - 23);
 			GuiHelper.addText(GuiHelper.getCenter(skill.getSkillName(), guiLeft, 160, 2F), guiTop - 20, skill.getSkillName(), 2F, new Color(180, 170, 150).hashCode(),
 					false);
+			
+			skill.renderGUIForground(this, partialTicks, mouseX, mouseY, guiLeft + 6, guiTop - 23);
+			
 			Minecraft.getMinecraft().getTextureManager().bindTexture(background);
+			this.drawTexturedModalRect(guiLeft + 3, guiTop + 164, 218, 105, 30, 22);
 		}
 	}
 	

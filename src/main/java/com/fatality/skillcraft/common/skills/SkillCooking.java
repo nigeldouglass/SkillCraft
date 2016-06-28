@@ -21,35 +21,13 @@
 package com.fatality.skillcraft.common.skills;
 
 import com.fatality.skillcraft.api.skills.api.SkillBase;
-import com.fatality.skillcraft.api.skills.api.events.IHaveEvent;
-import com.fatality.skillcraft.common.skills.events.EventCooking;
-import com.fatality.skillcraft.utils.ModInfo;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.util.ResourceLocation;
 
 import java.awt.*;
 
-public class SkillCooking extends SkillBase implements IHaveEvent {
+public class SkillCooking extends SkillBase {
 	
 	public SkillCooking() {
 		super("Cooking", 1);
 		setBadgeColour(new Color(160, 100, 40).hashCode());
-	}
-	
-	@Override
-	public Object getEventClass() {
-		return new EventCooking(this);
-	}
-	
-	@Override
-	public void renderGUIBackground(Gui gui, float partialTicks, int mouseX, int mouseY, int guiLeft, int guiTop) {
-		ResourceLocation background2 = new ResourceLocation("skillcraft:textures/gui/skillbook_2.png");
-		Minecraft.getMinecraft().getTextureManager().bindTexture(background2);
-		gui.drawTexturedModalRect(guiLeft, guiTop, 0, 0, 160, 203);
-		
-		ResourceLocation background = new ResourceLocation(ModInfo.MOD_ID + ":textures/gui/skillbook.png");
-		Minecraft.getMinecraft().getTextureManager().bindTexture(background);
-		gui.drawTexturedModalRect(guiLeft+3, guiTop + 164, 218, 105, 30, 22);
 	}
 }

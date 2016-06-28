@@ -21,7 +21,6 @@
 package com.fatality.skillcraft.api.skills.api;
 
 import com.fatality.skillcraft.api.skills.api.utils.ISkill;
-import com.fatality.skillcraft.utils.ModInfo;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.ResourceLocation;
@@ -32,7 +31,7 @@ import java.util.List;
 
 public class SkillBase implements ISkill {
 	
-	public final ResourceLocation background = new ResourceLocation(ModInfo.MOD_ID,"textures/gui/skillbook_1.png");
+	private ResourceLocation background = new ResourceLocation("skillcraft:textures/guis/skillbook_1.png");
 	private String name;
 	private int defaultLevel;
 	private List<Level> skillLevels = new ArrayList<Level>();
