@@ -22,18 +22,22 @@ package com.fatality.skillcraft.common.events;
 
 import com.fatality.skillcraft.api.skills.SkillRegistry;
 import com.fatality.skillcraft.api.skills.api.SkillBase;
+import com.fatality.skillcraft.api.skills.api.SkillUpdate;
 import com.fatality.skillcraft.common.items.Items;
 import com.fatality.skillcraft.common.skills.data.PlayerSkill;
 import com.fatality.skillcraft.common.skills.data.SkillCapability;
 import com.fatality.skillcraft.common.skills.data.SkillProvider;
 import com.fatality.skillcraft.utils.ModInfo;
+import com.fatality.skillcraft.utils.experience;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 
 public class EventPlayer {
 	
@@ -60,7 +64,38 @@ public class EventPlayer {
 	public void AttachCapability(AttachCapabilitiesEvent.Entity event) {
 		if (!event.getEntity().hasCapability(SkillProvider.SKILLS, null) && event.getEntity() instanceof EntityPlayer) {
 			event.addCapability(new ResourceLocation(ModInfo.MOD_NAME, "skills"), new SkillProvider(new SkillCapability()));
+		}
+	}
+	
+	@SubscribeEvent
+	public void update(PlayerTickEvent event) {
+		World world = event.player.worldObj;
+		
+		if (!world.isRemote && !SkillUpdate.instance().updateTick().isEmpty()) {
+
+			for (SkillUpdate.Update updates : SkillUpdate.instance().updateTick()) {
+				PlayerSkill current = SkillProvider.get(updates.getPlayer()).getSkill(updates.getSkill().getSkillName());
+				int currentExp = current.getExp();
+				int newExp = currentExp + updates.getExp();
+				int level = current.getLevel();
+				
+				for (int i = level; i <= experience.MAX_LEVEL; i++) {
+					int nextLevelReq = experience.getRequireExp(i + 1);
+					System.out.println(String.format("Current exp is %s", newExp));
+					System.out.println(String.format("LEVEL [%s] requires %s", i + 1, nextLevelReq));
+					if (currentExp < nextLevelReq && newExp >= nextLevelReq) {
+						level = i + 1;
+					} else {
+						break;
+					}
+				}
+				
+				experience.levelUp(updates.getPlayer(), updates.getSkill(), level);
+				
+				SkillProvider.get(updates.getPlayer()).updateSkill(current.getName(), level, newExp);
+			}
 			
+			SkillUpdate.instance().clear();
 		}
 	}
 }

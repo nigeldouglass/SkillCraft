@@ -18,38 +18,14 @@
  * No warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
  */
 
-package com.fatality.skillcraft.common.skills.events;
+package com.fatality.skillcraft.api.skills.api.utils;
 
-import com.fatality.skillcraft.api.skills.api.Level;
 import com.fatality.skillcraft.api.skills.api.SkillBase;
-import com.fatality.skillcraft.api.skills.api.SkillUpdate;
-import com.fatality.skillcraft.api.skills.api.events.IHandleEvents;
-import com.fatality.skillcraft.common.skills.SkillAgriculture;
-import com.fatality.skillcraft.common.skills.data.PlayerSkill;
-import com.fatality.skillcraft.common.skills.data.SkillProvider;
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
-import java.util.Map;
+import java.util.Collection;
 
-public class EventAgriculture extends IHandleEvents {
+public interface ISkillUpdate<T> {
 	
-	public EventAgriculture(SkillBase instance) {
-		super(instance);
-	}
-	
-	@SubscribeEvent
-	public void firstJoin(PlayerEvent.PlayerLoggedInEvent event) {
-		EntityPlayer player = event.player;
-		for (Map.Entry<Block, Integer> b : ((SkillAgriculture) instance).getBlocksPlaced().entrySet()) {
-			System.out.println(String.format("%s when placed gives you %s exp", b.getKey(), b.getValue()));
-		}
-		
-		SkillUpdate.instance().updateExp(player, instance, 100);
-		
-		
-	}
-	
+	void updateExp(EntityPlayer player, SkillBase skill, int exp);
 }

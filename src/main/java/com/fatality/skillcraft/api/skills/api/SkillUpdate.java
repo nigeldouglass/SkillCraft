@@ -18,38 +18,58 @@
  * No warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
  */
 
-package com.fatality.skillcraft.common.skills.events;
+package com.fatality.skillcraft.api.skills.api;
 
-import com.fatality.skillcraft.api.skills.api.Level;
-import com.fatality.skillcraft.api.skills.api.SkillBase;
-import com.fatality.skillcraft.api.skills.api.SkillUpdate;
-import com.fatality.skillcraft.api.skills.api.events.IHandleEvents;
-import com.fatality.skillcraft.common.skills.SkillAgriculture;
-import com.fatality.skillcraft.common.skills.data.PlayerSkill;
-import com.fatality.skillcraft.common.skills.data.SkillProvider;
-import net.minecraft.block.Block;
+import com.fatality.skillcraft.api.skills.api.utils.ISkillUpdate;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
-public class EventAgriculture extends IHandleEvents {
+public class SkillUpdate implements ISkillUpdate {
 	
-	public EventAgriculture(SkillBase instance) {
-		super(instance);
+	private static final SkillUpdate instance = new SkillUpdate();
+	private List<Update> updates = new ArrayList<Update>();
+	
+	public static SkillUpdate instance() {
+		return instance;
 	}
 	
-	@SubscribeEvent
-	public void firstJoin(PlayerEvent.PlayerLoggedInEvent event) {
-		EntityPlayer player = event.player;
-		for (Map.Entry<Block, Integer> b : ((SkillAgriculture) instance).getBlocksPlaced().entrySet()) {
-			System.out.println(String.format("%s when placed gives you %s exp", b.getKey(), b.getValue()));
+	@Override
+	public void updateExp(EntityPlayer player, SkillBase skill, int exp) {
+		updates.add(new Update(player, skill, exp));
+	}
+	
+	public List<Update> updateTick() {
+		return updates;
+	}
+	
+	public void clear() {
+		updates.clear();
+	}
+	
+	public class Update {
+		EntityPlayer player;
+		SkillBase skill;
+		int exp;
+		
+		private Update(EntityPlayer player, SkillBase skill, int exp) {
+			this.player = player;
+			this.skill = skill;
+			this.exp = exp;
 		}
 		
-		SkillUpdate.instance().updateExp(player, instance, 100);
+		public EntityPlayer getPlayer() {
+			return this.player;
+		}
 		
+		public SkillBase getSkill() {
+			return this.skill;
+		}
 		
+		public int getExp() {
+			return this.exp;
+		}
 	}
 	
 }

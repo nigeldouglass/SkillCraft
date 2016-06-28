@@ -63,13 +63,11 @@ public class SkillCapability implements ISkillCapability {
 		for (int i = 0; i < skills.size(); i++) {
 			if (skills.get(i).getName().equalsIgnoreCase(level.getName())) {
 				match = true;
-				System.out.println(String.format("%s cannot be added as name already exists as %s", level.getName(), skills.get(i).getName()));
 			}
 		}
 		
 		if (!match || skills.isEmpty()) {
 			skills.add(level);
-			System.out.println(String.format("%s was added to skill tree on %s side", level.getName(), FMLCommonHandler.instance().getEffectiveSide()));
 		}
 	}
 	
@@ -89,7 +87,6 @@ public class SkillCapability implements ISkillCapability {
 		
 		@Override
 		public NBTBase writeNBT(Capability<ISkillCapability> capability, ISkillCapability instance, EnumFacing side) {
-			System.out.println("WRITING NBT         " + instance.getAllSkills().size());
 			
 			NBTTagCompound tag = new NBTTagCompound();
 			NBTTagList list = new NBTTagList();
@@ -112,7 +109,6 @@ public class SkillCapability implements ISkillCapability {
 		
 		@Override
 		public void readNBT(Capability<ISkillCapability> capability, ISkillCapability instance, EnumFacing side, NBTBase nbt) {
-			System.out.println("READING NBT         " + instance.getAllSkills().size() + "          " + FMLCommonHandler.instance().getEffectiveSide());
 			NBTTagCompound nbtData = (NBTTagCompound) nbt;
 			NBTTagList list = nbtData.getTagList("list", 10);
 			
@@ -123,7 +119,6 @@ public class SkillCapability implements ISkillCapability {
 				int level = skillNBT.getInteger("level");
 				int exp = skillNBT.getInteger("exp");
 				
-				System.out.println(String.format("%s with exp %s gives level %s", name, exp, level));
 				instance.addSkill(new PlayerSkill(name, level, exp));
 			}
 		}
