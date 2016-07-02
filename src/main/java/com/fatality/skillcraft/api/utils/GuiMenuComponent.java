@@ -18,30 +18,32 @@
  * No warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
  */
 
-package com.fatality.skillcraft.utils;
+package com.fatality.skillcraft.api.utils;
 
-import com.fatality.skillcraft.api.skills.api.SkillBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextFormatting;
-
-public class experience {
-	
-	public static final int MAX_LEVEL = 55;
-	
-	public static int getRequireExp(int level) {
-		double exp = 0.000000;
+public class GuiMenuComponent {
 		
-		for (int i = 1; i < level; i++) {
-			exp += Math.floor((i + 300 * Math.pow(2.000, i / 7.000)) / 4);
+		private int ID;
+		private Object[] data;
+		
+		public GuiMenuComponent(int ID, Object... obj) {
+			this.ID = ID;
+			this.data = obj;
 		}
-		return (int) exp;
-	}
-	
-	public static void levelUp(EntityPlayer player, SkillBase skill, int level) {
-		for (EntityPlayer p : player.getEntityWorld().playerEntities) {
-			p.addChatMessage(new TextComponentString(String.format("%s%s%s has achieved level %s in %s%s", TextFormatting.GREEN, player.getName(), TextFormatting.WHITE, level, TextFormatting.RED, skill.getSkillName())));
+		
+		public Object[] getData() {
+			return this.data;
 		}
+		
+		public int getID(){
+			return this.ID;
+		}
+		
+		public void setValue(Object... obj) {
+			this.data = obj;
+		}
+		
+		public void updateID(int newID) {
+			this.ID = newID;
+		}
+		
 	}
-	
-}

@@ -20,6 +20,7 @@
 
 package com.fatality.skillcraft.common.skills.data;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 
 import java.util.List;
@@ -30,9 +31,11 @@ public interface ISkillCapability {
 	
 	List<PlayerSkill> getAllSkills();
 	
-	void updateSkill(String name, int level, int exp);
+	void updateSkill(EntityPlayer player, String name, int level, int exp);
 	
 	void addSkill(PlayerSkill level);
+	
+	void dataChange(EntityPlayer player);
 	
 	NBTTagCompound saveNBTData();
 	

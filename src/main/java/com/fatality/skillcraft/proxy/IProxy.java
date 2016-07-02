@@ -42,4 +42,7 @@ public interface IProxy {
 	
 	void registerEvents();
 	
+	void registerMessages();
+	
+	void registerCapabilities();
 }

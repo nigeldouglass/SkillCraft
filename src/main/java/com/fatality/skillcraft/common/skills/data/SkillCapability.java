@@ -20,6 +20,10 @@
 
 package com.fatality.skillcraft.common.skills.data;
 
+import com.fatality.skillcraft.common.messages.MessageUpdateAllCaps;
+import com.fatality.skillcraft.proxy.CommonProxy;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -33,6 +37,7 @@ import java.util.List;
 public class SkillCapability implements ISkillCapability {
 	
 	List<PlayerSkill> skills = new ArrayList<PlayerSkill>();
+	private EntityPlayer entityPlayer;
 	
 	public PlayerSkill getSkill(String name) {
 		
@@ -48,11 +53,12 @@ public class SkillCapability implements ISkillCapability {
 		return skills;
 	}
 	
-	public void updateSkill(String name, int level, int exp) {
+	public void updateSkill(EntityPlayer player, String name, int level, int exp) {
 		for (PlayerSkill skill : skills) {
 			if (skill.getName().equalsIgnoreCase(name)) {
 				skill.setLevel(level);
 				skill.setExp(exp);
+				dataChange(player);
 			}
 		}
 	}
@@ -68,6 +74,14 @@ public class SkillCapability implements ISkillCapability {
 		
 		if (!match || skills.isEmpty()) {
 			skills.add(level);
+		}
+	}
+	
+	@Override
+	public void dataChange(EntityPlayer player){
+		if(player != null){
+			System.out.println(player);
+			CommonProxy.network.sendTo(new MessageUpdateAllCaps(saveNBTData()), (EntityPlayerMP) player);
 		}
 	}
 	
@@ -102,8 +116,6 @@ public class SkillCapability implements ISkillCapability {
 			}
 			
 			tag.setTag("list", list);
-			
-			System.out.println(tag);
 			return tag;
 		}
 		
@@ -111,7 +123,6 @@ public class SkillCapability implements ISkillCapability {
 		public void readNBT(Capability<ISkillCapability> capability, ISkillCapability instance, EnumFacing side, NBTBase nbt) {
 			NBTTagCompound nbtData = (NBTTagCompound) nbt;
 			NBTTagList list = nbtData.getTagList("list", 10);
-			
 			for (int i = 0; i < list.tagCount(); i++) {
 				NBTTagCompound skillNBT = (NBTTagCompound) list.get(i);
 				

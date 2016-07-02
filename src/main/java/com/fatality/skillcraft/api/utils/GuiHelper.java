@@ -18,7 +18,7 @@
  * No warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
  */
 
-package com.fatality.skillcraft.utils;
+package com.fatality.skillcraft.api.utils;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -67,6 +67,25 @@ public class GuiHelper {
 	public static void addElement(int xPosition, int yPosition, int xTexturePosition, int yTexturePosition, int xSize,
 	                              int ySize, String text, float scale, ResourceLocation texture, GuiContainer gui) {
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+		renderElement(xPosition, yPosition, xTexturePosition, yTexturePosition, xSize, ySize, text, scale, texture,
+				gui);
+	}
+	
+	public static void addElement(int xPosition, int yPosition, int xTexturePosition, int yTexturePosition, int xSize,
+	                              int ySize, String text, float scale, ResourceLocation texture, int colour, GuiContainer gui) {
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+		int c = colour;
+		
+		if ((c & -67108864) == 0) {
+			c |= -16777216;
+		}
+		
+		float red = (float) (c >> 16 & 255) / 255.0F;
+		float green = (float) (c >> 8 & 255) / 255.0F;
+		float blue = (float) (c & 255) / 255.0F;
+		float alpha = (float) (c >> 24 & 255) / 255.0F;
+		
+		GlStateManager.color(red, green, blue, alpha);
 		renderElement(xPosition, yPosition, xTexturePosition, yTexturePosition, xSize, ySize, text, scale, texture,
 				gui);
 	}

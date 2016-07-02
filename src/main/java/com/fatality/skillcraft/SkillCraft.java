@@ -42,8 +42,6 @@ public class SkillCraft {
 	@SidedProxy(clientSide = ModInfo.CLIENT_PROXY_CLASS, serverSide = ModInfo.SERVER_PROXY_CLASS)
 	public static IProxy proxy;
 	
-	public static SimpleNetworkWrapper channel;
-	
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		proxy.initialiseAPI();
@@ -58,7 +56,9 @@ public class SkillCraft {
 		proxy.registerGUIs();
 		proxy.registerRenderers();
 		
-		CapabilityManager.INSTANCE.register(ISkillCapability.class, SkillsCapabilityHandler.handler, SkillCapability.class);
+		proxy.registerMessages();
+		proxy.registerCapabilities();
+		
 	}
 	
 	@Mod.EventHandler

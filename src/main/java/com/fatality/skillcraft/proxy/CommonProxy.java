@@ -29,13 +29,23 @@ import com.fatality.skillcraft.api.skills.api.events.IHaveEvent;
 import com.fatality.skillcraft.common.blocks.Blocks;
 import com.fatality.skillcraft.common.events.EventPlayer;
 import com.fatality.skillcraft.common.items.Items;
+import com.fatality.skillcraft.common.messages.MessageUpdateAllCaps;
 import com.fatality.skillcraft.common.skills.Skills;
+import com.fatality.skillcraft.common.skills.data.ISkillCapability;
+import com.fatality.skillcraft.common.skills.data.SkillCapability;
 import com.fatality.skillcraft.utils.GuiHandler;
+import com.fatality.skillcraft.utils.ModInfo;
 import com.fatality.skillcraft.utils.api.SkillsAPIImpl;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import net.minecraftforge.fml.relauncher.Side;
 
 public class CommonProxy implements IProxy {
+	
+	public static SimpleNetworkWrapper network;
+	
 	@Override
 	public void initialiseAPI() {
 		SkillsAPI.setup(new SkillsAPIImpl());
@@ -99,5 +109,18 @@ public class CommonProxy implements IProxy {
 					MinecraftForge.EVENT_BUS.register(((IHaveEvent) skill).getEventClass());
 				}
 		}
+	}
+	
+	@Override
+	public void registerMessages() {
+		int messageCounter = 0;
+		network = NetworkRegistry.INSTANCE.newSimpleChannel(ModInfo.MESSENGER);
+		
+		network.registerMessage(MessageUpdateAllCaps.UpdateAllCapsHandler.class, MessageUpdateAllCaps.class, messageCounter++, Side.CLIENT);
+	}
+	
+	@Override
+	public void registerCapabilities() {
+		CapabilityManager.INSTANCE.register(ISkillCapability.class, SkillCapability.SkillsCapabilityHandler.handler, SkillCapability.class);
 	}
 }

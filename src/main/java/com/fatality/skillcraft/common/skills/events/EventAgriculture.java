@@ -43,6 +43,7 @@ public class EventAgriculture extends IHandleEvents {
 	@SubscribeEvent
 	public void firstJoin(PlayerEvent.PlayerLoggedInEvent event) {
 		EntityPlayer player = event.player;
+		System.out.println(player);
 		for (Map.Entry<Block, Integer> b : ((SkillAgriculture) instance).getBlocksPlaced().entrySet()) {
 			System.out.println(String.format("%s when placed gives you %s exp", b.getKey(), b.getValue()));
 		}

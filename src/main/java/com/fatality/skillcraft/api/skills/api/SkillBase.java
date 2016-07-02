@@ -21,8 +21,11 @@
 package com.fatality.skillcraft.api.skills.api;
 
 import com.fatality.skillcraft.api.skills.api.utils.ISkill;
+import com.fatality.skillcraft.api.utils.GuiHelper;
+import com.fatality.skillcraft.api.utils.GuiMenu;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.util.ResourceLocation;
 
 import java.awt.*;
@@ -87,11 +90,25 @@ public class SkillBase implements ISkill {
 	
 	public void renderGUIBackground(Gui gui, float partialTicks, int mouseX, int mouseY, int guiLeft, int guiTop) {
 		Minecraft.getMinecraft().getTextureManager().bindTexture(background);
-		gui.drawTexturedModalRect(guiLeft, guiTop, 0, 0, 160, 203);
+		gui.drawTexturedModalRect(guiLeft, guiTop, 0, 0, 148, 189);
 	}
 	
-	public void renderGUIForground(Gui gui, float partialTicks, int mouseX, int mouseY, int guiLeft, int guiTop) {
+	public void renderGUIForground(GuiContainer gui, float partialTicks, int mouseX, int mouseY, int guiLeft, int guiTop, int exp, int level, GuiMenu menu) {
+		Minecraft.getMinecraft().getTextureManager().bindTexture(background);
+		gui.drawTexturedModalRect(guiLeft + 10, guiTop + 23, 0, 189, 128, 5);
+		gui.drawTexturedModalRect(guiLeft + 10, guiTop + 23, 0, 194, exp, 5);
+		GuiHelper.addText(GuiHelper.getCenter(String.valueOf(level), guiLeft - 6, 160, 1F), guiTop + 30, String.valueOf(level), 1F, new Color(180, 170, 150).hashCode(),
+				false);
+		menu.update();
+		menu.render(gui);
+		if (menu.getSelected().length == 3) {
+			GuiHelper.addText(GuiHelper.getCenter((String) menu.getSelected()[1], guiLeft+74, 73, 1.25F), guiTop + 40, (String) menu.getSelected()[1], 1F, new Color(180, 170, 150).hashCode(),
+					false);
+		}
 	}
 	
+	public ResourceLocation getBackgroundTexture() {
+		return this.background;
+	}
 	
 }

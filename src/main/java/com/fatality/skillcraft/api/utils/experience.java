@@ -18,30 +18,36 @@
  * No warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
  */
 
-package com.fatality.skillcraft.api.skills.api;
+package com.fatality.skillcraft.api.utils;
 
-public class Level {
+import com.fatality.skillcraft.api.skills.api.SkillBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
+
+public class experience {
 	
-	private int level;
-	private String title;
-	private Object description;
+	public static final int MAX_LEVEL = 55;
 	
-	public Level(int level, String title, Object... description) {
-		this.level = level;
-		this.title = title;
-		this.description = description;
+	public static int getRequireExp(int level) {
+		double exp = 0.000000;
+		
+		for (int i = 1; i < level; i++) {
+			exp += Math.floor((i + 300 * Math.pow(2.000, i / 7.000)) / 4);
+		}
+		return (int) exp;
 	}
 	
-	public int getLevel() {
-		return this.level;
+	public static void levelUp(EntityPlayer player, SkillBase skill, int level) {
+		for (EntityPlayer p : player.getEntityWorld().playerEntities) {
+			p.addChatMessage(new TextComponentString(String.format("%s%s%s has achieved level %s in %s%s", TextFormatting.GREEN, player.getName(), TextFormatting.WHITE, level, TextFormatting.RED, skill.getSkillName())));
+		}
 	}
 	
-	public String getTitle() {
-		return this.title;
-	}
-	
-	public Object getDescription() {
-		return this.description;
+	public static void levelDown(EntityPlayer player, SkillBase skill, int level) {
+		for (EntityPlayer p : player.getEntityWorld().playerEntities) {
+			p.addChatMessage(new TextComponentString(String.format("%s%s%s was deranked to level %s in %s%s", TextFormatting.GREEN, player.getName(), TextFormatting.WHITE, level, TextFormatting.RED, skill.getSkillName())));
+		}
 	}
 	
 }
